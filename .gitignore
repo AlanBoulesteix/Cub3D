@@ -1,2 +1,4 @@
+lib/libft/libft.a
+lib/libft/*.o
 *.o
 cub3d
