@@ -1,4 +1,7 @@
-lib/libft/libft.a
-lib/libft/*.o
+.vscode
+.build
+.build/*
+lib/*/*.a
+lib/*/*.o
 *.o
 cub3d
