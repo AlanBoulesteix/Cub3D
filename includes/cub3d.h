@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/12 15:42:09 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/07/12 16:23:38 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERROR_ARG 1
 # define ERROR_EXTENSION 2
 
+# define ERROR_RGB 1
 # define ERROR_MAP 3
 
 # define NORTH 0
@@ -64,11 +65,16 @@ t_data		*read_file(char *str);
 /// @brief Init struct data
 /// @return t_data*
 t_data		*init_data(void);
-/// @brief free char **tab
-/// @param tab pointer to pointer of char
-void		free_db_tab(char **tab);
+/// @brief Free struct data
+/// @param data Struct data
+void		free_data(t_data *data);
 /// @brief free struct data
 /// @param data pointer to struct data
 void		print_data(t_data *data);
+
+/*UTILS*/
+/// @brief free char **tab
+/// @param tab pointer to pointer of char
+void		free_db_tab(char **tab);
 
 #endif

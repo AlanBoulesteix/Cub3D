@@ -29,8 +29,46 @@ int	check_input(int ac, char **av)
 	return (0);
 }
 
+int	check_rgb(t_data *data)
+{
+	int	i;
+
+	i = -1;
+
+	while (++i < 3)
+	{
+		if (!data->rgb_ceiling
+			|| (data->rgb_ceiling[i] < 0 || data->rgb_ceiling[i] > 255))
+			return(ERROR_RGB);
+	}
+	i = -1;
+	while (++i < 3)
+	{
+		if (!data->rgb_floor 
+			|| (data->rgb_floor[i] < 0 || data->rgb_ceiling[i] > 255))
+			return(ERROR_RGB);
+	}
+	return (0);
+}
+
+int	check_map(char **map)
+{
+	char	*dup_map;
+
+	
+}
+
 int	check_data(t_data *data)
 {
-	(void)data;
+	if (check_rgb(data))
+	{
+		printf("Error\nWrong RGB values\n");
+		return (ERROR_RGB);
+	}
+	if (check_map(data->map))
+	{
+		printf("Error\nSomething went wrong with map\n");
+		return (ERROR_MAP);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/12 15:31:19 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/07/12 16:39:34 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	read_info_write_in_data(int fd, t_data *data)
 			data->we_path = ft_strdup(line + 2);
 		else if (!data->ea_path && check_side_texture(line, EAST))
 			data->ea_path = ft_strdup(line + 2);
-		else if (ft_strlen(line) > 0 && line[0] == 'F')
+		else if (ft_strlen(line) > 0 && line[0] == 'F' && !data->rgb_floor)
 			data->rgb_floor = find_rgb(line);
-		else if (ft_strlen(line) > 0 && line[0] == 'C')
+		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
 			data->rgb_ceiling = find_rgb(line);
 		else if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'))//@TODO : Fix a faire quand map entre-coupe d'une ligne
 		{
