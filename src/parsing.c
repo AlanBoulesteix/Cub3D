@@ -14,39 +14,23 @@ int	check_extension(char *file)
 	return (0);
 }
 
-int	check_map(char *str)
-{
-	return(read_file(str));
-}
-
 int	check_input(int ac, char **av)
 {
 	if (ac != 2)
+	{
+		printf("Error\nWrong number of arguments\n");
 		return (ERROR_ARG);
+	}
 	else if (check_extension(av[1]))
+	{
+		printf("Error\nWrong file extension\n");
 		return (ERROR_EXTENSION);
-	else if (check_map(av[1]))
-		return (ERROR_MAP);
+	}
 	return (0);
 }
 
-void	printf_error(int error)
+int	check_data(t_data *data)
 {
-	if (error == ERROR_ARG)
-		printf("Error\nWrong number of arguments\n");
-	else if (error == ERROR_EXTENSION)
-		printf("Error\nWrong file extension\n");
-	else if (error == ERROR_MAP)
-		printf("Error\nWrong map\n");
-}
-
-int main(int ac, char *av[])
-{
-	int		error;
-
-	error = check_input(ac, av);
-	if (error)
-		printf_error(error);
-	else
-		printf("OK\n");
+	(void)data;
+	return (0);
 }

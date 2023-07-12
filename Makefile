@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
+#    Updated: 2023/07/12 15:29:41 by aboulest         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 
 NAME 			:= cub3d	
@@ -5,9 +16,13 @@ NAME 			:= cub3d
 SRC_DIR			= src/
 INCLUDES_DIR	= includes/
 
-FILES			:= get_next_line.c \
+FILES			:= main.c \
+				get_next_line.c \
 				get_next_line_utils.c \
+				str_utils.c \
 				parsing.c \
+				data.c \
+				read_file_utils.c \
 				read_file.c \
 
 

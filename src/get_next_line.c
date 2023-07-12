@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:18:53 by aboulest          #+#    #+#             */
-/*   Updated: 2022/12/01 13:07:43 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/07/12 14:23:40 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,3 @@ char	*get_next_line(int fd)
 	stash = get_after(stash);
 	return (line);
 }
-/*
-int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	if (argc != 2)
-		return (-1);
-	fd = open(argv[1], O_RDONLY);
-	while ((line = get_next_line(fd)))
-	{
-		printf("Line : %s", line);
-		free(line);
-	}
-	return (0);
-*/

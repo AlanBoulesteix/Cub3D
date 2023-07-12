@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/10 12:43:24 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:42:09 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define ERROR_ARG 1
 # define ERROR_EXTENSION 2
+
 # define ERROR_MAP 3
 
 # define NORTH 0
@@ -33,8 +34,8 @@
 typedef struct s_data
 {
 	char		**map;
-	int			*color_floor;
-	int			*color_ceiling;
+	int			*rgb_floor;
+	int			*rgb_ceiling;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
@@ -42,6 +43,32 @@ typedef struct s_data
 
 }				t_data;
 
-int 	read_file(char *str);
+/*PARSING*/
+/// @brief Check if arguments are valid
+/// @param ac Number of arguments sent 
+/// @param av list of arguments sent
+/// @return 0, 1 or 2
+int			check_input(int ac, char **av);
+/// @brief Check if params of struct data are valid
+/// @param data Struct data
+/// @return 
+int			check_data(t_data *data);
+
+/*READ_FILE*/
+/// @brief Read the file and write the data in a struct
+/// @param str Path of the file
+/// @return t_data*
+t_data		*read_file(char *str);
+
+/*DATA*/
+/// @brief Init struct data
+/// @return t_data*
+t_data		*init_data(void);
+/// @brief free char **tab
+/// @param tab pointer to pointer of char
+void		free_db_tab(char **tab);
+/// @brief free struct data
+/// @param data pointer to struct data
+void		print_data(t_data *data);
 
 #endif
