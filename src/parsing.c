@@ -53,9 +53,8 @@ int	check_rgb(t_data *data)
 
 int	check_map(char **map)
 {
-	char	*dup_map;
-
-	
+	(void)map;
+	return (0);		
 }
 
 int	check_data(t_data *data)

@@ -6,7 +6,7 @@
 #    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/07/12 15:29:41 by aboulest         ###   ########.fr        #
+#    Updated: 2023/07/13 12:11:55 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,18 @@ RM				= rm -f
 DIR_DUP			= mkdir $(OBJ_DIR)
 DIR_DUPS		= mkdir $(OBJ_DIR)$(SRC_DIR)
 
+
+MLX			= -Imlx_linux -O3
+MAKE_MLX	= make  -C minilibx-linux
+MLX_CC		= -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+
 ##################################################################
 
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -o $(NAME) $(LIBFT)
+	$(MAKE_MLX)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(MLX_CC) -o $(NAME) $(LIBFT)
 
 $(OBJ_DIR)%.o:%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
