@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/12 16:23:38 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:39:30 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include "../minilibx-linux/mlx.h"
 
 # define ERROR_ARG 1
 # define ERROR_EXTENSION 2
 
 # define ERROR_RGB 1
 # define ERROR_MAP 3
+
+# define ERROR_MLX 1
 
 # define NORTH 0
 # define SOUTH 1
@@ -43,6 +46,16 @@ typedef struct s_data
 	char		*ea_path;
 
 }				t_data;
+
+typedef struct s_data_mlx
+{
+	void		*mlx;
+	void		*wind;
+	void		*img;
+	int			rgb_floor;
+	int			rgb_ceiling;
+	
+}				t_data_mlx;
 
 /*PARSING*/
 /// @brief Check if arguments are valid
@@ -76,5 +89,8 @@ void		print_data(t_data *data);
 /// @brief free char **tab
 /// @param tab pointer to pointer of char
 void		free_db_tab(char **tab);
+
+/*GAME*/
+int			game(t_data *data);
 
 #endif

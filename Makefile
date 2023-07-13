@@ -6,7 +6,7 @@
 #    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/07/13 12:11:55 by aboulest         ###   ########.fr        #
+#    Updated: 2023/07/13 13:03:16 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FILES			:= main.c \
 				data.c \
 				read_file_utils.c \
 				read_file.c \
+				game.c \
 
 
 SRC				= $(addprefix $(SRC_DIR), $(FILES))
