@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:09:44 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/13 13:04:20 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:22:14 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char *av[])
 		return(EXIT_FAILURE);
 	if (check_data(data))
 		return (free_data(data),EXIT_FAILURE);
-	free_data(data);
+	print_data(data);
 	game(data);
+	free_data(data);
 }

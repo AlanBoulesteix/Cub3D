@@ -6,7 +6,7 @@
 #    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/07/13 13:03:16 by aboulest         ###   ########.fr        #
+#    Updated: 2023/08/11 11:03:31 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,13 @@ SRC				= $(addprefix $(SRC_DIR), $(FILES))
 
 OBJ_DIR			= .build/
 OBJ				= $(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
+DEPS			= $(OBJ:%.o=%.d)
 
 LIBFT			= lib/libft/libft.a
 MAKE_LIBFT		= make -C lib/libft/
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -g3 -pthread
+CFLAGS			= -Wall -Wextra -Werror -MMD -g3 -pthread
 INCLUDES		= -I$(INCLUDES_DIR) -Ilib/libft/ -I$(INCLUDES_DIR)cub3d -I$(INCLUDES_DIR)get_next_line
 
 RM				= rm -f
@@ -79,3 +80,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+-include $(DEPS)
