@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/12 16:39:34 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:45:16 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,14 @@ t_data	*read_file(char *str)
 	}
 	read_info_write_in_data(fd, data);
 	close(fd);
+
+	//@TODO make it small function
+	data->len_x = ft_strlen(data->map[0]);
+	int i = -1;
+	while (data->map[++i])
+		;
+	data->len_y = i;
+	data->char_pos_x = 100;
+	data->char_pos_y = 100;
 	return (data);
 }

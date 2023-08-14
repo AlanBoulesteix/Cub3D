@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:16:24 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/12 15:40:37 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/14 11:51:35 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ void	print_data(t_data *data)
 	i = -1;
 	while (data->map[++i])
 		printf("%s\n", data->map[i]);
+	printf("len_x = %d\tlen_y = %d\n", data->len_x, data->len_x);
 }

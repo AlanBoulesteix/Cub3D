@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/13 15:39:30 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:50:36 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@
 # define EAST 3
 # define ERROR 4
 
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_ESCAPE 65307
+
 typedef struct s_data
 {
 	char		**map;
@@ -44,17 +50,22 @@ typedef struct s_data
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
+	int			len_x;
+	int			len_y;
+	float		char_pos_x;
+	float		char_pos_y;
 
 }				t_data;
 
 typedef struct s_data_mlx
 {
+	t_data		*context;
 	void		*mlx;
 	void		*wind;
 	void		*img;
 	int			rgb_floor;
 	int			rgb_ceiling;
-	
+
 }				t_data_mlx;
 
 /*PARSING*/
