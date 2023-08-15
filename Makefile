@@ -6,7 +6,7 @@
 #    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/08/11 11:03:31 by aboulest         ###   ########.fr        #
+#    Updated: 2023/08/15 18:23:51 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FILES			:= main.c \
 				data.c \
 				read_file_utils.c \
 				read_file.c \
+				hooks.c \
 				game.c \
 
 
@@ -40,7 +41,7 @@ CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -MMD -g3 -pthread
 INCLUDES		= -I$(INCLUDES_DIR) -Ilib/libft/ -I$(INCLUDES_DIR)cub3d -I$(INCLUDES_DIR)get_next_line
 
-RM				= rm -f
+RM				= rm -rf
 DIR_DUP			= mkdir $(OBJ_DIR)
 DIR_DUPS		= mkdir $(OBJ_DIR)$(SRC_DIR)
 
@@ -70,8 +71,8 @@ $(LIBFT):
 clean: 
 	make clean -C lib/libft
 	$(RM) $(OBJ)
-	rmdir $(OBJ_DIR)$(SRC_DIR)
-	rmdir $(OBJ_DIR)
+	$(RM) $(OBJ_DIR)$(SRC_DIR)
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	make fclean -C lib/libft

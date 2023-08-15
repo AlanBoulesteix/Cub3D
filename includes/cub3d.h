@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/14 16:50:36 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:28:47 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+#include <stdbool.h> 
 # include <sys/types.h>
 # include "../minilibx-linux/mlx.h"
 
@@ -41,6 +42,11 @@
 # define KEY_S 115
 # define KEY_ESCAPE 65307
 
+# define _W 0
+# define _A 1
+# define _D 2
+# define _S 3
+
 typedef struct s_data
 {
 	char		**map;
@@ -57,12 +63,23 @@ typedef struct s_data
 
 }				t_data;
 
+typedef struct s_img 
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+
+}				t_img;
+
 typedef struct s_data_mlx
 {
 	t_data		*context;
+	t_img		*imgptr;
 	void		*mlx;
 	void		*wind;
-	void		*img;
+	bool		key_tab[8];
 	int			rgb_floor;
 	int			rgb_ceiling;
 
@@ -100,6 +117,11 @@ void		print_data(t_data *data);
 /// @brief free char **tab
 /// @param tab pointer to pointer of char
 void		free_db_tab(char **tab);
+
+/*HOOKS*/
+/// @brief Set hooks
+/// @param data_mlx Struct data_mlx
+void	set_hook(t_data_mlx *data_mlx);
 
 /*GAME*/
 int			game(t_data *data);

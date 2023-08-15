@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/14 14:45:16 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:19:20 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,22 @@ t_data	*read_file(char *str)
 	//@TODO make it small function
 	data->len_x = ft_strlen(data->map[0]);
 	int i = -1;
+	int	j;
 	while (data->map[++i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'S')
+			{
+				printf("i = %d, j = %d\n", i, j);
+			data->char_pos_x = j * 64.0f; //@TODO : Fix position
+				data->char_pos_y = i * 64.0f;
+			}
+			j++;
+		}	
+	}
 		;
 	data->len_y = i;
-	data->char_pos_x = 100;
-	data->char_pos_y = 100;
 	return (data);
 }
