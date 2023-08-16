@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/15 16:28:47 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:05:09 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 # include <fcntl.h>
 #include <stdbool.h> 
 # include <sys/types.h>
+# include <math.h>
 # include "../minilibx-linux/mlx.h"
+
+# define PI	3.1451926535
 
 # define ERROR_ARG 1
 # define ERROR_EXTENSION 2
@@ -60,6 +63,9 @@ typedef struct s_data
 	int			len_y;
 	float		char_pos_x;
 	float		char_pos_y;
+	float		delta_x;
+	float		delta_y;
+	float		angle;
 
 }				t_data;
 

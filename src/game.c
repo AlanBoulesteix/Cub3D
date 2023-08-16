@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:45:46 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/15 18:21:58 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:35:25 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ void	draw_background(t_data_mlx *data_mlx, int start_x, int start_y, char bloc)
 		while (temp_y < start_y + 64)
 		{
 			if (temp_y % 64 == 0)
-				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00000000);
+				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00CCCCCC);
 			else if (temp_x % 64 == 0)
-				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00000000);
+				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00CCCCCC);
 			else if (bloc == '1')
-				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x000066FF);
+				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00000000);
 			else
 				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00FFFFFF);
 			temp_y++;
@@ -118,12 +118,65 @@ void	draw_map(t_data_mlx *data_mlx, t_data *data)
 	}
 }
 
+void	draw_direction(t_data_mlx *data_mlx, t_data *data)
+{
+	int	i;
+	int	j;
+	int	end_i;
+	int end_j;
+	
+	i = data->char_pos_x ;
+	end_i = i + data->delta_x;
+	end_j = data->char_pos_y + data->delta_y;
+	j = data->char_pos_y ;
+	while (j < end_j && i < end_i)
+	{
+		my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X0099FF00);
+		j++;
+		i++;
+	}
+}
+
 void	draw_character(t_data_mlx *data_mlx, t_data *data)
 {
-	for (int i = data->char_pos_x; i < data->char_pos_x + 16; i++)
+	int i;
+	int j;
+
+	i = data->char_pos_x - 9;
+	while (++i < data->char_pos_x + 8)
 	{
-		for (int j = data->char_pos_y ; j < data->char_pos_y + 16; j++)
+		j = data->char_pos_y - 9;
+		while (++j < data->char_pos_y + 8)
 			my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00FF00FF);
+	}
+
+	//0X0099FF00
+	draw_direction(data_mlx, data);
+}
+
+void	draw_line(t_data_mlx *data_mlx, t_data *data)
+{
+	int	x;
+	int	y;
+	int	id_x;
+	int	id_y;
+
+
+	x = data->char_pos_x;
+	y = data->char_pos_y;
+	id_x = x / 64;
+	id_y = y / 64;
+	while (x < 1920)
+	{
+		if (x % 64 == 0)
+			id_x++;
+		if (y % 64 == 0)
+			id_y++;
+		if (data->map[id_y][id_x] == '1')
+			break ;
+		else
+			my_mlx_pixel_put(data_mlx->imgptr, x, y, 0X00FF1515);
+		x++;
 	}
 }
 
@@ -131,32 +184,42 @@ void	render_img(t_data_mlx *data_mlx, t_data *data)
 {
 	draw_map(data_mlx, data);
 	draw_character(data_mlx, data);
+	// draw_line(data_mlx, data);
 	mlx_put_image_to_window(data_mlx->mlx, data_mlx->wind, data_mlx->imgptr->img, 0, 0);
-	// printf("coord_x_char = %f\tcoord_y_char = %f\n", data->char_pos_x, data->char_pos_y);
 }
 
 int	loop_game(void *data)
 {
 	t_data_mlx *data_mlx = (t_data_mlx *)data;
 	
-	if (data_mlx->key_tab[_W])
-	{
-		data_mlx->context->char_pos_y -= 2.0f;
-		render_img(data_mlx, data_mlx->context);
-	}
-	if (data_mlx->key_tab[_S])
-	{
-		data_mlx->context->char_pos_y += 2.0f;
-		render_img(data_mlx, data_mlx->context);
-	}
 	if (data_mlx->key_tab[_A])
 	{
-		data_mlx->context->char_pos_x -= 2.0f;
+		data_mlx->context->angle -= 0.1;
+		if (data_mlx->context->angle < 0)
+			data_mlx->context->angle = 2 * PI;
+		data_mlx->context->delta_x = cos(data_mlx->context->angle) * 5;
+		data_mlx->context->delta_y = sin(data_mlx->context->angle) * 5;
 		render_img(data_mlx, data_mlx->context);
 	}
 	if (data_mlx->key_tab[_D])
 	{
-		data_mlx->context->char_pos_x += 2.0f;
+		data_mlx->context->angle += 0.1;
+		if (data_mlx->context->angle > 2 * PI)
+			data_mlx->context->angle = 0;
+		data_mlx->context->delta_x = cos(data_mlx->context->angle) * 5;
+		data_mlx->context->delta_y = sin(data_mlx->context->angle) * 5;
+		render_img(data_mlx, data_mlx->context);
+	}
+	if (data_mlx->key_tab[_W])
+	{
+		data_mlx->context->char_pos_x += data_mlx->context->delta_x;
+		data_mlx->context->char_pos_y += data_mlx->context->delta_y;
+		render_img(data_mlx, data_mlx->context);
+	}
+	if (data_mlx->key_tab[_S])
+	{
+		data_mlx->context->char_pos_x -= data_mlx->context->delta_x;
+		data_mlx->context->char_pos_y -= data_mlx->context->delta_y;
 		render_img(data_mlx, data_mlx->context);
 	}
 	return (0);

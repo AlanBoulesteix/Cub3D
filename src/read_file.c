@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/15 18:19:20 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:20:53 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,8 @@ t_data	*read_file(char *str)
 		{
 			if (data->map[i][j] == 'S')
 			{
-				printf("i = %d, j = %d\n", i, j);
-			data->char_pos_x = j * 64.0f; //@TODO : Fix position
-				data->char_pos_y = i * 64.0f;
+				data->char_pos_x = j * 64.0f + 32.0f;
+				data->char_pos_y = i * 64.0f + 32.0f;
 			}
 			j++;
 		}	
