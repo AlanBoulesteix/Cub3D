@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:45:46 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/16 16:35:25 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:11:29 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,22 +118,48 @@ void	draw_map(t_data_mlx *data_mlx, t_data *data)
 	}
 }
 
-void	draw_direction(t_data_mlx *data_mlx, t_data *data)
+void	draw_cam(t_data_mlx *data_mlx, t_data *data)
 {
-	int	i;
-	int	j;
-	int	end_i;
-	int end_j;
-	
-	i = data->char_pos_x ;
-	end_i = i + data->delta_x;
-	end_j = data->char_pos_y + data->delta_y;
-	j = data->char_pos_y ;
-	while (j < end_j && i < end_i)
+	float	i;
+	float	j;
+	int		id_i;
+	int		id_j;
+
+	i = data->char_pos_x;
+	j = data->char_pos_y;
+	id_i = i / 64;
+	id_j = j / 64;
+	while (i != data->char_pos_x + 1920 && j != data->char_pos_y + 1080)
 	{
-		my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X0099FF00);
-		j++;
-		i++;
+		if (data->map[(int)j / 64][(int)i / 64] == '1') //
+			break ;
+		my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00FF00FF);
+		i += cos(data->angle + PI / 6);
+		j += sin(data->angle + PI / 6);
+	}
+	i = data->char_pos_x;
+	j = data->char_pos_y;
+	id_i = i / 64;
+	id_j = j / 64;
+	while (i != data->char_pos_x + 1920 && j != data->char_pos_y + 1080)
+	{
+		if (data->map[(int)j / 64][(int)i / 64] == '1')
+			break ;
+		my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00FF00FF);
+		i += cos(data->angle - PI / 6);
+		j += sin(data->angle - PI / 6);
+	}
+	i = data->char_pos_x;
+	j = data->char_pos_y;
+	id_i = i / 64;
+	id_j = j / 64;
+	while (i != data->char_pos_x + 1920 && j != data->char_pos_y + 1080)
+	{
+		if (data->map[(int)j / 64][(int)i / 64] == '1')
+			break ;
+		my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00FF00FF);
+		i += cos(data->angle);
+		j += sin(data->angle);
 	}
 }
 
@@ -147,11 +173,9 @@ void	draw_character(t_data_mlx *data_mlx, t_data *data)
 	{
 		j = data->char_pos_y - 9;
 		while (++j < data->char_pos_y + 8)
-			my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00FF00FF);
+			my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00008000);
 	}
-
-	//0X0099FF00
-	draw_direction(data_mlx, data);
+	draw_cam(data_mlx, data);
 }
 
 void	draw_line(t_data_mlx *data_mlx, t_data *data)

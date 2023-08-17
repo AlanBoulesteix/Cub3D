@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/16 11:05:09 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:33:37 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-#include <stdbool.h> 
+# include <stdbool.h> 
 # include <sys/types.h>
 # include <math.h>
 # include "../minilibx-linux/mlx.h"
@@ -49,6 +49,11 @@
 # define _A 1
 # define _D 2
 # define _S 3
+
+# define M_NORTH 3 * PI / 2
+# define M_SOUTH PI / 2
+# define M_EAST PI
+# define M_WEST 2 * PI
 
 typedef struct s_data
 {

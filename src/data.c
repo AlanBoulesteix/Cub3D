@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:16:24 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/16 16:18:35 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:10:19 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_data	*init_data(void)
 	data->ea_path = NULL;
 	data->rgb_floor = NULL;
 	data->rgb_ceiling = NULL;
-	data->angle = 0;
+	data->angle = M_SOUTH;
 	data->delta_x = cos(data->angle) * 5;
 	data->delta_y = sin(data->angle) * 5;
 	return (data);
@@ -69,6 +69,4 @@ void	print_data(t_data *data)
 	i = -1;
 	while (data->map[++i])
 		printf("%s\n", data->map[i]);
-	printf("len_x = %d\tlen_y = %d\n", data->len_x, data->len_x);
-	printf("coord_x_char = %f\tcoord_y_char = %f\n", data->char_pos_x, data->char_pos_y);
 }
