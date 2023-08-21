@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:16:24 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/17 18:10:19 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:56:48 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_data	*init_data(void)
 	data->ea_path = NULL;
 	data->rgb_floor = NULL;
 	data->rgb_ceiling = NULL;
-	data->angle = M_SOUTH;
 	data->delta_x = cos(data->angle) * 5;
 	data->delta_y = sin(data->angle) * 5;
 	return (data);

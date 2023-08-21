@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/16 11:20:53 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:54:35 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ t_data	*read_file(char *str)
 	read_info_write_in_data(fd, data);
 	close(fd);
 
-	//@TODO make it small function
-	data->len_x = ft_strlen(data->map[0]);
+	//@TODO : SLICE FUNCTION
 	int i = -1;
 	int	j;
 	while (data->map[++i])
@@ -86,15 +85,23 @@ t_data	*read_file(char *str)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == 'S')
+			if (data->map[i][j] == 'S' ||data->map[i][j] == 'N' ||
+			data->map[i][j] == 'E' ||data->map[i][j] == 'W')
 			{
 				data->char_pos_x = j * 64.0f + 32.0f;
 				data->char_pos_y = i * 64.0f + 32.0f;
+				data->char_side = data->map[i][j];
+				if (data->char_side == 'N')
+					data->angle = NORTH_S;
+				else if (data->char_side == 'S')
+					data->angle = SOUTH_S;
+				else if (data->char_side == 'E')
+					data->angle = EAST_S;
+				else if (data->char_side == 'W')
+					data->angle = WEST_S;
 			}
 			j++;
 		}	
 	}
-		;
-	data->len_y = i;
 	return (data);
 }

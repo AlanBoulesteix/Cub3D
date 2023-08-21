@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/17 17:33:37 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:28:37 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@
 # define _D 2
 # define _S 3
 
-# define M_NORTH 3 * PI / 2
-# define M_SOUTH PI / 2
-# define M_EAST PI
-# define M_WEST 2 * PI
+# define NORTH_S 3 * PI / 2
+# define SOUTH_S PI / 2
+# define EAST_S PI
+# define WEST_S 2 * PI
+
+# define W_WIDTH 1920
+# define W_HEIGHT 1080
+# define W_TITLE "Cub3D"
 
 typedef struct s_data
 {
@@ -64,13 +68,12 @@ typedef struct s_data
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	int			len_x;
-	int			len_y;
-	float		char_pos_x;
-	float		char_pos_y;
-	float		delta_x;
-	float		delta_y;
-	float		angle;
+	double		char_pos_x;
+	double		char_pos_y;
+	double		delta_x;
+	double		delta_y;
+	double		angle;
+	char		char_side;
 
 }				t_data;
 
@@ -97,44 +100,70 @@ typedef struct s_data_mlx
 }				t_data_mlx;
 
 /*PARSING*/
+/*#####################################################*/
 /// @brief Check if arguments are valid
 /// @param ac Number of arguments sent 
 /// @param av list of arguments sent
 /// @return 0, 1 or 2
 int			check_input(int ac, char **av);
+
 /// @brief Check if params of struct data are valid
 /// @param data Struct data
 /// @return 
 int			check_data(t_data *data);
+/*#####################################################*/
 
 /*READ_FILE*/
+/*#####################################################*/
 /// @brief Read the file and write the data in a struct
 /// @param str Path of the file
 /// @return t_data*
 t_data		*read_file(char *str);
+/*#####################################################*/
 
 /*DATA*/
+/*#####################################################*/
 /// @brief Init struct data
 /// @return t_data*
 t_data		*init_data(void);
+
 /// @brief Free struct data
 /// @param data Struct data
 void		free_data(t_data *data);
+
 /// @brief free struct data
 /// @param data pointer to struct data
 void		print_data(t_data *data);
+/*#####################################################*/
+
+/*DATA MLX*/
+/*#####################################################*/
+/// @brief Init struct data_mlx
+/// @param data_mlx pointer to struct data_mlx
+int			start_mlx(t_data_mlx *data_mlx, t_data *data);
+
+/// @brief free struct data_mlx
+/// @param data_mlx pointer to struct data_mlx
+void		destroy_data_mlx(t_data_mlx* data_mlx);
+/*#####################################################*/
 
 /*UTILS*/
+/*#####################################################*/
 /// @brief free char **tab
 /// @param tab pointer to pointer of char
 void		free_db_tab(char **tab);
+/*#####################################################*/
 
 /*HOOKS*/
+/*#####################################################*/
 /// @brief Set hooks
 /// @param data_mlx Struct data_mlx
-void	set_hook(t_data_mlx *data_mlx);
+void		set_hook(t_data_mlx *data_mlx);
+/*#####################################################*/
 
 /*GAME*/
+/*#####################################################*/
 int			game(t_data *data);
+/*#####################################################*/
 
 #endif
