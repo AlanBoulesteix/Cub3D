@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:56 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/15 11:50:24 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:42:19 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	keypress_handler(int keycode, void *data)
 {
 	t_data_mlx	*data_mlx;
-	
+
 	data_mlx = (t_data_mlx *)data;
 	if (keycode == KEY_W)
 		data_mlx->key_tab[_W] = true;
@@ -33,7 +33,7 @@ static int	keypress_handler(int keycode, void *data)
 static int	keyrelease_handler(int keycode, void *data)
 {
 	t_data_mlx	*data_mlx;
-	
+
 	data_mlx = (t_data_mlx *)data;
 	if (keycode == KEY_W)
 		data_mlx->key_tab[_W] = false;

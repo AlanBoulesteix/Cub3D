@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/21 14:54:35 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:59:07 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ t_data	*read_file(char *str)
 					data->angle = EAST_S;
 				else if (data->char_side == 'W')
 					data->angle = WEST_S;
+				data->delta_x = cos(data->angle) * 5;
+				data->delta_y = sin(data->angle) * 5;
 			}
 			j++;
 		}	

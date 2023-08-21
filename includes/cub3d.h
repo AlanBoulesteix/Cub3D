@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/21 15:28:37 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:02:08 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@
 
 # define NORTH_S 3 * PI / 2
 # define SOUTH_S PI / 2
-# define EAST_S PI
-# define WEST_S 2 * PI
+# define EAST_S 2 * PI
+# define WEST_S PI
 
 # define W_WIDTH 1920
 # define W_HEIGHT 1080
@@ -159,6 +159,13 @@ void		free_db_tab(char **tab);
 /// @brief Set hooks
 /// @param data_mlx Struct data_mlx
 void		set_hook(t_data_mlx *data_mlx);
+/*#####################################################*/
+
+/*DRAW*/
+/*#####################################################*/
+/// @brief Draw background
+///	@param data_mlx Struct data_mlx
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 /*#####################################################*/
 
 /*GAME*/

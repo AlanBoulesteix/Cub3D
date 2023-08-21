@@ -6,11 +6,13 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:45:46 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/21 15:32:06 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:03:23 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	render_minimap(t_data_mlx *data_mlx, t_data *data);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -45,8 +47,9 @@ void	cam(t_data_mlx *data_mlx, t_data *data)
 
 void	render_img(t_data_mlx *data_mlx, t_data *data)
 {
-	cam(data_mlx, data);
-	mlx_put_image_to_window(data_mlx->mlx, data_mlx->wind, data_mlx->imgptr->img, 0, 0);
+	render_minimap(data_mlx, data);
+	// cam(data_mlx, data);
+	// mlx_put_image_to_window(data_mlx->mlx, data_mlx->wind, data_mlx->imgptr->img, 0, 0);
 }
 
 int	loop_game(void *data)
