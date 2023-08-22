@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/21 18:59:07 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:56:47 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,39 @@ t_data	*read_file(char *str)
 			if (data->map[i][j] == 'S' ||data->map[i][j] == 'N' ||
 			data->map[i][j] == 'E' ||data->map[i][j] == 'W')
 			{
-				data->char_pos_x = j * 64.0f + 32.0f;
-				data->char_pos_y = i * 64.0f + 32.0f;
-				data->char_side = data->map[i][j];
-				if (data->char_side == 'N')
-					data->angle = NORTH_S;
-				else if (data->char_side == 'S')
-					data->angle = SOUTH_S;
-				else if (data->char_side == 'E')
-					data->angle = EAST_S;
-				else if (data->char_side == 'W')
-					data->angle = WEST_S;
-				data->delta_x = cos(data->angle) * 5;
-				data->delta_y = sin(data->angle) * 5;
+				data->pos_x = j;
+				data->pos_y = i;
+				if (data->map[i][j] == 'N')
+				{
+					data->delta_x = 0;
+					data->delta_y = 1;
+					data->plane_x = 0.66;
+					data->plane_y = 0.00;
+				}
+				else if (data->map[i][j] == 'S')
+				{
+					data->delta_x = 0;
+					data->delta_y = -1;
+					data->plane_x = -0.66;
+					data->plane_y = 0.00;
+				}
+				else if (data->map[i][j] == 'E')
+				{
+					data->delta_x = 1;
+					data->delta_y = 0;
+					data->plane_x = 0.00;
+					data->plane_y = 0.66;
+				}
+				else if (data->map[i][j] == 'W')
+				{
+					data->delta_x = -1;
+					data->delta_y = 0;
+					data->plane_x = 0.00;
+					data->plane_y = 0.66;
+				}
 			}
 			j++;
-		}	
+		}
 	}
 	return (data);
 }

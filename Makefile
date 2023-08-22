@@ -6,7 +6,7 @@
 #    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/08/21 17:12:12 by aboulest         ###   ########.fr        #
+#    Updated: 2023/08/22 16:47:28 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ FILES			:= main.c \
 				read_file_utils.c \
 				read_file.c \
 				hooks.c \
-				mini_map.c \
 				game.c \
+				# mini_map.c \
 
 
 SRC				= $(addprefix $(SRC_DIR), $(FILES))

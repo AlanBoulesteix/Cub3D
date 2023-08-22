@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/21 19:02:08 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:50:29 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,18 @@
 # define EAST_S 2 * PI
 # define WEST_S PI
 
+# define W_TITLE "Cub3D"
 # define W_WIDTH 1920
 # define W_HEIGHT 1080
-# define W_TITLE "Cub3D"
+# define MOVESPEED 0.1
+# define ROTSPEED 0.1
+
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define YELLOW 0xFFFF00
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
 
 typedef struct s_data
 {
@@ -68,12 +77,12 @@ typedef struct s_data
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	double		char_pos_x;
-	double		char_pos_y;
+	double		pos_x;
+	double		pos_y;
 	double		delta_x;
 	double		delta_y;
-	double		angle;
-	char		char_side;
+	double		plane_x;
+	double		plane_y;
 
 }				t_data;
 
@@ -87,10 +96,22 @@ typedef struct s_img
 
 }				t_img;
 
+typedef	struct s_persona
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+
+}				t_persona;
+
 typedef struct s_data_mlx
 {
 	t_data		*context;
 	t_img		*imgptr;
+	t_persona	*persona;
 	void		*mlx;
 	void		*wind;
 	bool		key_tab[8];

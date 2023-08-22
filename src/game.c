@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:45:46 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/21 19:03:23 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:21:11 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,80 +24,179 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	cam(t_data_mlx *data_mlx, t_data *data)
 {
-	double	dir_x;
-	double	dir_y;
-	double	ray;
-
-	ray = data->angle - atan(0.66/1.0);
-	while (ray >= data->angle - atan(0.66/1.0) && ray <= data->angle + atan(0.66/1.0))
+	int		x;
+	int		map_x;
+	int		map_y;
+	int 	step_x;
+	int 	step_y;
+	int		hit;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double side_dist_x;
+	double side_dist_y;
+	bool	side;
+	double delta_dist_x;
+	double delta_dist_y;
+	double perp_wall_dist;
+	
+	x = 0;
+	while (x < W_WIDTH)
 	{
-		dir_x = data->char_pos_x;
-		dir_y = data->char_pos_y;
-		while (dir_x != data->char_pos_x + W_WIDTH && dir_y != data->char_pos_y + W_HEIGHT)
+		camera_x = 2 * x / (double)W_WIDTH - 1;
+		ray_dir_x = data_mlx->persona->dir_x + data_mlx->persona->plane_x * camera_x;
+		ray_dir_y = data_mlx->persona->dir_y + data_mlx->persona->plane_y * camera_x;
+		//########################################################
+		map_x = (int)data_mlx->persona->pos_x;
+		map_y = (int)data_mlx->persona->pos_y;
+		delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
+		delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
+		hit = 0;
+		//####################Calcule Step#########################
+		if (ray_dir_x < 0)
 		{
-			if (data->map[(int)dir_y / 64][(int)dir_x / 64] == '1')
-				break ;
-			my_mlx_pixel_put(data_mlx->imgptr, dir_x, dir_y, 0X00FF00FF);
-			dir_x += cos(ray);
-			dir_y += sin(ray);
+			step_x = -1;
+			side_dist_x = (data_mlx->persona->pos_x - map_x) * delta_dist_x;
 		}
-		ray += atan(0.66/1.0) / W_WIDTH;
+		else
+		{
+			step_x = 1;
+			side_dist_x = (map_x + 1.0 - data_mlx->persona->pos_x) * delta_dist_x;
+		}
+		if (ray_dir_y < 0)
+		{
+			step_y = -1;
+			side_dist_y = (data_mlx->persona->pos_y - map_y) * delta_dist_y;
+		}
+		else
+		{
+			step_y = 1;
+			side_dist_y = (map_y + 1.0 - data_mlx->persona->pos_y) * delta_dist_y;
+		}
+		//########################################################
+		while (!hit)
+		{
+			if (side_dist_x < side_dist_y)
+			{
+				side_dist_x += delta_dist_x;
+				map_x += step_x;
+				side = 0;
+			}
+			else
+			{
+				side_dist_y += delta_dist_y;
+				map_y += step_y;
+				side = 1;
+			}
+			hit = (data->map[map_y][map_x] == '1');
+		}
+		if (!side)
+			perp_wall_dist = side_dist_x - delta_dist_x;
+		else
+			perp_wall_dist = side_dist_y - delta_dist_y;
+		//########################################################
+		int line_height;
+		int draw_start;
+		int draw_end;
+		int	texture_img;
+		
+		line_height = (int)(W_HEIGHT / perp_wall_dist);
+		draw_start = (-line_height / 2) + (W_HEIGHT / 2);
+		if (draw_start < 0)
+			draw_start = 0;
+		draw_end = (line_height / 2) + (W_HEIGHT / 2);
+		if (draw_end >= W_HEIGHT)
+			draw_end = W_HEIGHT - 1;
+		if (side == 0 && ray_dir_x < 0)
+			texture_img = 1;
+		else if (side == 0 && ray_dir_x > 0)
+			texture_img = 2;
+		else if (side == 1 && ray_dir_y < 0)
+			texture_img = 3;
+		else if (side == 1 && ray_dir_y > 0)
+			texture_img = 4;
+		//########################################################
+		//Draw
+		int tmp;
+		int color;
+		
+		tmp = 0;
+		while(tmp < draw_start)
+			my_mlx_pixel_put(data_mlx->imgptr, x, tmp++, BLACK);
+		while(tmp < draw_end)
+		{
+			if (texture_img == 1)
+				color = RED;
+			else if (texture_img == 2)
+				color = BLUE;
+			else if (texture_img == 3)
+				color = YELLOW;
+			else if (texture_img == 4)
+				color = GREEN;
+			my_mlx_pixel_put(data_mlx->imgptr, x, tmp, color);
+			tmp++;
+		}
+		while(tmp < W_HEIGHT)
+			my_mlx_pixel_put(data_mlx->imgptr, x, tmp++, BLACK);
+		x++;
 	}
 }
 
 void	render_img(t_data_mlx *data_mlx, t_data *data)
 {
-	render_minimap(data_mlx, data);
-	// cam(data_mlx, data);
-	// mlx_put_image_to_window(data_mlx->mlx, data_mlx->wind, data_mlx->imgptr->img, 0, 0);
+	cam(data_mlx, data);
+	mlx_put_image_to_window(data_mlx->mlx, data_mlx->wind, data_mlx->imgptr->img, 0, 0);
 }
 
 int	loop_game(void *data)
 {
 	t_data_mlx *data_mlx = (t_data_mlx *)data;
-	
-	if (data_mlx->key_tab[_A])
-	{
-		data_mlx->context->angle -= 0.1;
-		if (data_mlx->context->angle < 0)
-			data_mlx->context->angle = 2 * PI;
-		data_mlx->context->delta_x = cos(data_mlx->context->angle) * 5;
-		data_mlx->context->delta_y = sin(data_mlx->context->angle) * 5;
-		render_img(data_mlx, data_mlx->context);
-	}
+	int 		y;
+	int 		x;
+	double 		old_dir_x;
+	double 		old_plane_x;
+
+	y = 0;
+	x = 0;
 	if (data_mlx->key_tab[_D])
 	{
-		data_mlx->context->angle += 0.1;
-		if (data_mlx->context->angle > 2 * PI)
-			data_mlx->context->angle = 0;
-		data_mlx->context->delta_x = cos(data_mlx->context->angle) * 5;
-		data_mlx->context->delta_y = sin(data_mlx->context->angle) * 5;
-		render_img(data_mlx, data_mlx->context);
+		old_dir_x = data_mlx->persona->dir_x;
+		data_mlx->persona->dir_x = data_mlx->persona->dir_x * cos(ROTSPEED) - data_mlx->persona->dir_y * sin(ROTSPEED);
+		data_mlx->persona->dir_y = old_dir_x * sin(ROTSPEED) + data_mlx->persona->dir_y * cos(ROTSPEED);
+		old_plane_x = data_mlx->persona->plane_x;
+		data_mlx->persona->plane_x = data_mlx->persona->plane_x * cos(ROTSPEED) - data_mlx->persona->plane_y * sin(ROTSPEED);
+		data_mlx->persona->plane_y = old_plane_x * sin(ROTSPEED) + data_mlx->persona->plane_y * cos(ROTSPEED);
+	}
+	if (data_mlx->key_tab[_A])
+	{
+		old_dir_x = data_mlx->persona->dir_x;
+		data_mlx->persona->dir_x = data_mlx->persona->dir_x * cos(-ROTSPEED) - data_mlx->persona->dir_y * sin(-ROTSPEED);
+		data_mlx->persona->dir_y = old_dir_x * sin(-ROTSPEED) + data_mlx->persona->dir_y * cos(-ROTSPEED);
+		old_plane_x = data_mlx->persona->plane_x;
+		data_mlx->persona->plane_x = data_mlx->persona->plane_x * cos(-ROTSPEED) - data_mlx->persona->plane_y * sin(-ROTSPEED);
+		data_mlx->persona->plane_y = old_plane_x * sin(-ROTSPEED) + data_mlx->persona->plane_y * cos(-ROTSPEED);
 	}
 	if (data_mlx->key_tab[_W])
 	{
-		//@TODO: CHANGE CODE DUE TO NORM
-		int x = (int)(data_mlx->context->char_pos_x + data_mlx->context->delta_x) / 64;
-		int y = (int)(data_mlx->context->char_pos_y + data_mlx->context->delta_y) / 64;
-		if (data_mlx->context->map[y][x] != '1')
+		y = (int)data_mlx->persona->pos_x + data_mlx->persona->dir_x * MOVESPEED;
+		x = (int)data_mlx->persona->pos_y + data_mlx->persona->dir_y * MOVESPEED;
+		if (data_mlx->context->map[x][y] != 1)
 		{
-			data_mlx->context->char_pos_x += data_mlx->context->delta_x;
-			data_mlx->context->char_pos_y += data_mlx->context->delta_y;
+			data_mlx->persona->pos_x += data_mlx->persona->dir_x * MOVESPEED;
+			data_mlx->persona->pos_y += data_mlx->persona->dir_y * MOVESPEED;
 		}
-		render_img(data_mlx, data_mlx->context);
 	}
 	if (data_mlx->key_tab[_S])
 	{
-		//@TODO: CHANGE CODE DUE TO NORM
-		int x = (int)(data_mlx->context->char_pos_x + data_mlx->context->delta_x) / 64;
-		int y = (int)(data_mlx->context->char_pos_y + data_mlx->context->delta_y) / 64;
-		if (data_mlx->context->map[y][x] != '1')
+		y = (int)data_mlx->persona->pos_x + data_mlx->persona->dir_x * MOVESPEED;
+		x = (int)data_mlx->persona->pos_y + data_mlx->persona->dir_y * MOVESPEED;
+		if (data_mlx->context->map[x][y] != 1)
 		{
-			data_mlx->context->char_pos_x -= data_mlx->context->delta_x;
-			data_mlx->context->char_pos_y -= data_mlx->context->delta_y;
+			data_mlx->persona->pos_x -= data_mlx->persona->dir_x * MOVESPEED;
+			data_mlx->persona->pos_y -= data_mlx->persona->dir_y * MOVESPEED;
 		}
-		render_img(data_mlx, data_mlx->context);
 	}
+	render_img(data_mlx, data_mlx->context);
 	return (0);
 }
 
