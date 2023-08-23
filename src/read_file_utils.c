@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:05:13 by aboulest          #+#    #+#             */
-/*   Updated: 2023/07/12 15:41:24 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:40:08 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_intlen(int n)
 	return (len);
 }
 
-int *find_rgb(char *line) //@TODO: check if not int 
+int *find_rgb(char *line)//@TODO: check if not int 
 {
 	int	*rgb;
 

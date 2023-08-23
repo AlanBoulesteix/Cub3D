@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/22 17:50:29 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:56:34 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h> 
 # include <sys/types.h>
 # include <math.h>
+# include <limits.h>
 # include "../minilibx-linux/mlx.h"
 
 # define PI	3.1451926535
@@ -44,16 +45,15 @@
 # define KEY_D 100
 # define KEY_S 115
 # define KEY_ESCAPE 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 # define _W 0
 # define _A 1
 # define _D 2
 # define _S 3
-
-# define NORTH_S 3 * PI / 2
-# define SOUTH_S PI / 2
-# define EAST_S 2 * PI
-# define WEST_S PI
+# define _LEFT 4
+# define _RIGHT 5
 
 # define W_TITLE "Cub3D"
 # define W_WIDTH 1920
@@ -73,20 +73,20 @@ typedef struct s_data
 	char		**map;
 	int			*rgb_floor;
 	int			*rgb_ceiling;
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
 	double		pos_x;
 	double		pos_y;
 	double		delta_x;
 	double		delta_y;
 	double		plane_x;
 	double		plane_y;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
 
 }				t_data;
 
-typedef struct s_img 
+typedef struct s_img
 {
 	void		*img;
 	char		*addr;
@@ -96,7 +96,7 @@ typedef struct s_img
 
 }				t_img;
 
-typedef	struct s_persona
+typedef struct s_persona
 {
 	double		pos_x;
 	double		pos_y;
@@ -107,18 +107,42 @@ typedef	struct s_persona
 
 }				t_persona;
 
+typedef struct s_raycaster
+{
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			texture_img;
+}				t_raycaster;
+
 typedef struct s_data_mlx
 {
-	t_data		*context;
-	t_img		*imgptr;
-	t_persona	*persona;
-	void		*mlx;
-	void		*wind;
-	bool		key_tab[8];
-	int			rgb_floor;
-	int			rgb_ceiling;
+	t_data			*context;
+	t_img			*imgptr;
+	t_persona		*persona;
+	t_raycaster		*raycaster;
+	void			*mlx;
+	void			*wind;
+	bool			key_tab[6];
+	int				rgb_floor;
+	int				rgb_ceiling;
+	int				texture;
 
-}				t_data_mlx;
+}					t_data_mlx;
 
 /*PARSING*/
 /*#####################################################*/
@@ -165,7 +189,7 @@ int			start_mlx(t_data_mlx *data_mlx, t_data *data);
 
 /// @brief free struct data_mlx
 /// @param data_mlx pointer to struct data_mlx
-void		destroy_data_mlx(t_data_mlx* data_mlx);
+void		destroy_data_mlx(t_data_mlx *data_mlx);
 /*#####################################################*/
 
 /*UTILS*/
@@ -180,18 +204,42 @@ void		free_db_tab(char **tab);
 /// @brief Set hooks
 /// @param data_mlx Struct data_mlx
 void		set_hook(t_data_mlx *data_mlx);
+///@brief Move up
+/// @param data_mlx Struct data_mlx
+void		move_up(t_data_mlx *data_mlx);
+///@brief Move down
+/// @param data_mlx Struct data_mlx
+void		move_down(t_data_mlx *data_mlx);
+///@brief Move right
+/// @param data_mlx Struct data_mlx
+void		move_right(t_data_mlx *data_mlx);
+///@brief Move left
+/// @param data_mlx Struct data_mlx
+void		move_left(t_data_mlx *data_mlx);
+///@brief Rotate
+/// @param persona Struct persona
+/// @param flag true or false
+void		rotate(t_persona *persona, bool flag);
 /*#####################################################*/
 
 /*DRAW*/
 /*#####################################################*/
-/// @brief Draw background
+/// @brief Draw pixel into the image
 ///	@param data_mlx Struct data_mlx
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+/// @brief Draw colone into the image
+/// @param raycaster Struct raycaster
+///	@param data_mlx Struct data_mlx
+///	@param x position x
+void		draw_colone(t_raycaster *raycaster, t_data_mlx *data_mlx, int x);
 /*#####################################################*/
 
 /*GAME*/
 /*#####################################################*/
 int			game(t_data *data);
+/// @brief raycasting
+/// @param data_mlx Struct data_mlx
+void		raycasting(t_data_mlx *data_mlx);
 /*#####################################################*/
 
 #endif

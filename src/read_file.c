@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/22 17:56:47 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:48:00 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_data	*read_file(char *str)
 					data->delta_x = 1;
 					data->delta_y = 0;
 					data->plane_x = 0.00;
-					data->plane_y = 0.66;
+					data->plane_y = -0.66;
 				}
 				else if (data->map[i][j] == 'W')
 				{

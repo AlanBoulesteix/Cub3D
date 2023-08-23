@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:56 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/21 18:42:19 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:24:24 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ static int	keypress_handler(int keycode, void *data)
 		data_mlx->key_tab[_D] = true;
 	else if (keycode == KEY_S)
 		data_mlx->key_tab[_S] = true;
+	else if (keycode == KEY_LEFT)
+		data_mlx->key_tab[_LEFT] = true;
+	else if (keycode == KEY_RIGHT)
+		data_mlx->key_tab[_RIGHT] = true;
 	else if (keycode == KEY_ESCAPE)
 		mlx_loop_end(data_mlx->mlx);
 	return (0);
@@ -43,6 +47,10 @@ static int	keyrelease_handler(int keycode, void *data)
 		data_mlx->key_tab[_D] = false;
 	else if (keycode == KEY_S)
 		data_mlx->key_tab[_S] = false;
+	else if (keycode == KEY_LEFT)
+		data_mlx->key_tab[_LEFT] = false;
+	else if (keycode == KEY_RIGHT)
+		data_mlx->key_tab[_RIGHT] = false;
 	else if (keycode == KEY_ESCAPE)
 		mlx_loop_end(data_mlx->mlx);
 	return (0);

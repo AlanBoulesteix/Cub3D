@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:59:08 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/22 17:53:46 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:50:48 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,38 @@ int	set_persona(t_data_mlx *data_mlx, t_data *data)
 	data_mlx->persona = malloc(sizeof(t_persona));
 	if (!data_mlx->persona)
 		return (1);
-	data_mlx->persona->pos_x = data->pos_x;
-	data_mlx->persona->pos_y = data->pos_y;
+	data_mlx->persona->pos_x = data->pos_x + 0.5;
+	data_mlx->persona->pos_y = data->pos_y + 0.5;
 	data_mlx->persona->dir_x = data->delta_x;
 	data_mlx->persona->dir_y = data->delta_y;
 	data_mlx->persona->plane_x = data->plane_x;
 	data_mlx->persona->plane_y = data->plane_y;
+	return (0);
+}
+
+int	set_raycaster(t_data_mlx *data_mlx)
+{
+	data_mlx->raycaster = malloc(sizeof(t_raycaster));
+	if (!data_mlx->raycaster)
+		return (1);
+	data_mlx->raycaster->camera_x = 0;
+	data_mlx->raycaster->ray_dir_x = 0;
+	data_mlx->raycaster->ray_dir_y = 0;
+	data_mlx->raycaster->side_dist_x = 0;
+	data_mlx->raycaster->side_dist_y = 0;
+	data_mlx->raycaster->delta_dist_x = 0;
+	data_mlx->raycaster->delta_dist_y = 0;
+	data_mlx->raycaster->perp_wall_dist = 0;
+	data_mlx->raycaster->map_x = 0;
+	data_mlx->raycaster->map_y = 0;
+	data_mlx->raycaster->step_x = 0;
+	data_mlx->raycaster->step_y = 0;
+	data_mlx->raycaster->hit = 0;
+	data_mlx->raycaster->side = 0;
+	data_mlx->raycaster->line_height = 0;
+	data_mlx->raycaster->draw_start = 0;
+	data_mlx->raycaster->draw_end = 0;
+	data_mlx->raycaster->texture_img = 0;
 	return (0);
 }
 
@@ -64,6 +90,8 @@ int	init_data_mlx(t_data_mlx *data_mlx, t_data *data)
 	&data_mlx->imgptr->line_length, &data_mlx->imgptr->endian);
 	if (set_persona(data_mlx, data))
 		return (destroy_data_mlx(data_mlx), ERROR_MLX);
+	if (set_raycaster(data_mlx))
+		return (destroy_data_mlx(data_mlx), ERROR_MLX);
 	data_mlx->rgb_floor = get_rgb(data->rgb_floor);
 	data_mlx->rgb_ceiling = get_rgb(data->rgb_ceiling);
 	return (0);
@@ -81,6 +109,8 @@ void	destroy_data_mlx(t_data_mlx *data_mlx)
 {
 	if (data_mlx->persona)
 		free(data_mlx->persona);
+	if (data_mlx->raycaster)
+		free(data_mlx->raycaster);
 	if (data_mlx->imgptr->img)
 		mlx_destroy_image(data_mlx->mlx, data_mlx->imgptr->img);
 	if (data_mlx->imgptr)
