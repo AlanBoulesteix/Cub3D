@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/23 16:56:34 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:08:03 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct s_raycaster
 	int			texture_img;
 }				t_raycaster;
 
-typedef struct s_data_mlx
+typedef struct s_game
 {
 	t_data			*context;
 	t_img			*imgptr;
@@ -142,7 +142,7 @@ typedef struct s_data_mlx
 	int				rgb_ceiling;
 	int				texture;
 
-}					t_data_mlx;
+}					t_game;
 
 /*PARSING*/
 /*#####################################################*/
@@ -183,13 +183,13 @@ void		print_data(t_data *data);
 
 /*DATA MLX*/
 /*#####################################################*/
-/// @brief Init struct data_mlx
-/// @param data_mlx pointer to struct data_mlx
-int			start_mlx(t_data_mlx *data_mlx, t_data *data);
+/// @brief Init struct game
+/// @param game pointer to struct game
+int			start_mlx(t_game *game, t_data *data);
 
-/// @brief free struct data_mlx
-/// @param data_mlx pointer to struct data_mlx
-void		destroy_data_mlx(t_data_mlx *data_mlx);
+/// @brief free struct game
+/// @param game pointer to struct game
+void		destroy_game(t_game *game);
 /*#####################################################*/
 
 /*UTILS*/
@@ -202,20 +202,20 @@ void		free_db_tab(char **tab);
 /*HOOKS*/
 /*#####################################################*/
 /// @brief Set hooks
-/// @param data_mlx Struct data_mlx
-void		set_hook(t_data_mlx *data_mlx);
+/// @param game Struct game
+void		set_hook(t_game *game);
 ///@brief Move up
-/// @param data_mlx Struct data_mlx
-void		move_up(t_data_mlx *data_mlx);
+/// @param game Struct game
+void		move_up(t_game *game);
 ///@brief Move down
-/// @param data_mlx Struct data_mlx
-void		move_down(t_data_mlx *data_mlx);
+/// @param game Struct game
+void		move_down(t_game *game);
 ///@brief Move right
-/// @param data_mlx Struct data_mlx
-void		move_right(t_data_mlx *data_mlx);
+/// @param game Struct game
+void		move_right(t_game *game);
 ///@brief Move left
-/// @param data_mlx Struct data_mlx
-void		move_left(t_data_mlx *data_mlx);
+/// @param game Struct game
+void		move_left(t_game *game);
 ///@brief Rotate
 /// @param persona Struct persona
 /// @param flag true or false
@@ -225,21 +225,21 @@ void		rotate(t_persona *persona, bool flag);
 /*DRAW*/
 /*#####################################################*/
 /// @brief Draw pixel into the image
-///	@param data_mlx Struct data_mlx
+///	@param game Struct game
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 /// @brief Draw colone into the image
 /// @param raycaster Struct raycaster
-///	@param data_mlx Struct data_mlx
+///	@param game Struct game
 ///	@param x position x
-void		draw_colone(t_raycaster *raycaster, t_data_mlx *data_mlx, int x);
+void		draw_colone(t_raycaster *raycaster, t_game *game, int x);
 /*#####################################################*/
 
 /*GAME*/
 /*#####################################################*/
 int			game(t_data *data);
 /// @brief raycasting
-/// @param data_mlx Struct data_mlx
-void		raycasting(t_data_mlx *data_mlx);
+/// @param game Struct game
+void		raycasting(t_game *game);
 /*#####################################################*/
 
 #endif

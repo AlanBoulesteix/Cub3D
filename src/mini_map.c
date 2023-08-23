@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:13:06 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/22 14:57:26 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:08:03 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*MINI MAP A METTRE A L'ECHELLE SI ON L'UTILISE*/
 
-void	draw_background(t_data_mlx *data_mlx, int start_x, int start_y, char bloc)
+void	draw_background(t_game *game, int start_x, int start_y, char bloc)
 {
 	int	temp_x;
 	int	temp_y;
@@ -26,20 +26,20 @@ void	draw_background(t_data_mlx *data_mlx, int start_x, int start_y, char bloc)
 		while (temp_y < start_y + 64)
 		{
 			if (temp_y % 64 == 0)
-				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00CCCCCC);
+				my_mlx_pixel_put(game->imgptr, temp_y, temp_x, 0x00CCCCCC);
 			else if (temp_x % 64 == 0)
-				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00CCCCCC);
+				my_mlx_pixel_put(game->imgptr, temp_y, temp_x, 0x00CCCCCC);
 			else if (bloc == '1')
-				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00000000);
+				my_mlx_pixel_put(game->imgptr, temp_y, temp_x, 0x00000000);
 			else
-				my_mlx_pixel_put(data_mlx->imgptr, temp_y, temp_x, 0x00FFFFFF);
+				my_mlx_pixel_put(game->imgptr, temp_y, temp_x, 0x00FFFFFF);
 			temp_y++;
 		}
 		temp_x++;
 	}
 }
 
-void	draw_map(t_data_mlx *data_mlx, t_data *data)
+void	draw_map(t_game *game, t_data *data)
 {
 	int		x;
 	int		y;
@@ -50,14 +50,14 @@ void	draw_map(t_data_mlx *data_mlx, t_data *data)
 		y = 0;
 		while (data->map[x][y])
 		{
-			draw_background(data_mlx, x * 64, y * 64, data->map[x][y]);
+			draw_background(game, x * 64, y * 64, data->map[x][y]);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	draw_cam(t_data_mlx *data_mlx, t_data *data)
+void	draw_cam(t_game *game, t_data *data)
 {
 	double	i;
 	double	j;
@@ -74,7 +74,7 @@ void	draw_cam(t_data_mlx *data_mlx, t_data *data)
 		{
 			if (data->map[(int)j / 64][(int)i / 64] == '1')
 				break ;
-			my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00FF00FF);
+			my_mlx_pixel_put(game->imgptr, i, j, 0X00FF00FF);
 			i += cos(ray);
 			j += sin(ray);
 		}
@@ -82,7 +82,7 @@ void	draw_cam(t_data_mlx *data_mlx, t_data *data)
 	}
 }
 
-void	draw_character(t_data_mlx *data_mlx, t_data *data)
+void	draw_character(t_game *game, t_data *data)
 {
 	int i;
 	int j;
@@ -92,14 +92,14 @@ void	draw_character(t_data_mlx *data_mlx, t_data *data)
 	{
 		j = data->pos_y - 9;
 		while (++j < data->pos_y + 8)
-			my_mlx_pixel_put(data_mlx->imgptr, i, j, 0X00008000);
+			my_mlx_pixel_put(game->imgptr, i, j, 0X00008000);
 	}
-	draw_cam(data_mlx, data);
+	draw_cam(game, data);
 }
 
-void	render_minimap(t_data_mlx *data_mlx, t_data *data)
+void	render_minimap(t_game *game, t_data *data)
 {
-	draw_map(data_mlx, data);
-	draw_character(data_mlx, data);
-	mlx_put_image_to_window(data_mlx->mlx, data_mlx->wind, data_mlx->imgptr->img, 0, 0);
+	draw_map(game, data);
+	draw_character(game, data);
+	mlx_put_image_to_window(game->mlx, game->wind, game->imgptr->img, 0, 0);
 }
