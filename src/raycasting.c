@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:47:51 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/23 17:08:03 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:30:36 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ static void	set_height_wall(t_raycaster *raycaster, t_game *game)
 	if (raycaster->draw_end >= W_HEIGHT)
 		raycaster->draw_end = W_HEIGHT - 1;
 	if (raycaster->side == 0 && raycaster->ray_dir_x < 0)
-		game->texture = 1;
+		game->texture = EAST;
 	else if (raycaster->side == 0 && raycaster->ray_dir_x > 0)
-		game->texture = 2;
+		game->texture = WEST;
 	else if (raycaster->side == 1 && raycaster->ray_dir_y < 0)
-		game->texture = 3;
+		game->texture = SOUTH;
 	else if (raycaster->side == 1 && raycaster->ray_dir_y > 0)
-		game->texture = 4;
+		game->texture = NORTH;
 }
 
 void	raycasting(t_game *game)

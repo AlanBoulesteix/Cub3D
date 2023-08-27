@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/23 16:48:00 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:53:21 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	read_info_write_in_data(int fd, t_data *data)
 	while(line)
 	{
 		line = get_next_line(fd);
-		if (!data->no_path && check_side_texture(line, NORTH))
-			data->no_path = ft_strdup(line + 2);
-		else if (!data->so_path && check_side_texture(line, SOUTH))
-			data->so_path = ft_strdup(line + 2);
-		else if (!data->we_path && check_side_texture(line, WEST))
-			data->we_path = ft_strdup(line + 2);
-		else if (!data->ea_path && check_side_texture(line, EAST))
-			data->ea_path = ft_strdup(line + 2);
+		if (!data->no_tex_path && check_side_texture(line, NORTH))
+			data->no_tex_path = ft_strdup(line + 2);
+		else if (!data->so_tex_path && check_side_texture(line, SOUTH))
+			data->so_tex_path = ft_strdup(line + 2);
+		else if (!data->we_tex_path && check_side_texture(line, WEST))
+			data->we_tex_path = ft_strdup(line + 2);
+		else if (!data->ea_tex_path && check_side_texture(line, EAST))
+			data->ea_tex_path = ft_strdup(line + 2);
 		else if (ft_strlen(line) > 0 && line[0] == 'F' && !data->rgb_floor)
 			data->rgb_floor = find_rgb(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
@@ -55,6 +55,10 @@ void	read_info_write_in_data(int fd, t_data *data)
 	}
 	data->map = ft_split(map, '\n');
 	free(map);
+	data->no_tex_path[ft_strlen(data->no_tex_path) - 1] = '\0';
+	data->so_tex_path[ft_strlen(data->so_tex_path) - 1] = '\0';
+	data->ea_tex_path[ft_strlen(data->ea_tex_path) - 1] = '\0';
+	data->we_tex_path[ft_strlen(data->we_tex_path) - 1] = '\0';
 }
 
 t_data	*read_file(char *str)
@@ -93,14 +97,14 @@ t_data	*read_file(char *str)
 				if (data->map[i][j] == 'N')
 				{
 					data->delta_x = 0;
-					data->delta_y = 1;
+					data->delta_y = -1;
 					data->plane_x = 0.66;
 					data->plane_y = 0.00;
 				}
 				else if (data->map[i][j] == 'S')
 				{
 					data->delta_x = 0;
-					data->delta_y = -1;
+					data->delta_y = 1;
 					data->plane_x = -0.66;
 					data->plane_y = 0.00;
 				}
@@ -109,14 +113,14 @@ t_data	*read_file(char *str)
 					data->delta_x = 1;
 					data->delta_y = 0;
 					data->plane_x = 0.00;
-					data->plane_y = -0.66;
+					data->plane_y = 0.66;
 				}
 				else if (data->map[i][j] == 'W')
 				{
 					data->delta_x = -1;
 					data->delta_y = 0;
 					data->plane_x = 0.00;
-					data->plane_y = 0.66;
+					data->plane_y = -0.66;
 				}
 			}
 			j++;

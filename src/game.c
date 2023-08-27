@@ -6,12 +6,11 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:45:46 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/23 17:08:03 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:11:46 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	render_img(t_game *game)
 {
@@ -21,14 +20,14 @@ void	render_img(t_game *game)
 
 int	loop_game(void *data)
 {
-	t_game	*game;
+	t_game		*game;
 	t_persona	*perso;
 
 	game = (t_game *)data;
 	perso = game->persona;
-	if (game->key_tab[_LEFT])
-		rotate(perso, true);
 	if (game->key_tab[_RIGHT])
+		rotate(perso, true);
+	if (game->key_tab[_LEFT])
 		rotate(perso, false);
 	if (game->key_tab[_W])
 		move_up(game);

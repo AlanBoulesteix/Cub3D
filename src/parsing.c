@@ -39,14 +39,14 @@ int	check_rgb(t_data *data)
 	{
 		if (!data->rgb_ceiling
 			|| (data->rgb_ceiling[i] < 0 || data->rgb_ceiling[i] > 255))
-			return(ERROR_RGB);
+			return (ERROR_RGB);
 	}
 	i = -1;
 	while (++i < 3)
 	{
 		if (!data->rgb_floor 
 			|| (data->rgb_floor[i] < 0 || data->rgb_ceiling[i] > 255))
-			return(ERROR_RGB);
+			return (ERROR_RGB);
 	}
 	return (0);
 }
@@ -54,7 +54,7 @@ int	check_rgb(t_data *data)
 int	check_map(char **map)
 {
 	(void)map;
-	return (0);		
+	return (0);
 }
 
 int	check_data(t_data *data)

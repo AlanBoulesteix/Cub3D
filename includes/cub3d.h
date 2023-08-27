@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/23 17:08:03 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:53:31 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@
 # define W_TITLE "Cub3D"
 # define W_WIDTH 1920
 # define W_HEIGHT 1080
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
 # define MOVESPEED 0.1
 # define ROTSPEED 0.1
 
@@ -79,10 +81,10 @@ typedef struct s_data
 	double		delta_y;
 	double		plane_x;
 	double		plane_y;
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
+	char		*no_tex_path;
+	char		*so_tex_path;
+	char		*we_tex_path;
+	char		*ea_tex_path;
 
 }				t_data;
 
@@ -95,6 +97,19 @@ typedef struct s_img
 	int			endian;
 
 }				t_img;
+
+typedef struct s_tex
+{
+	void		*img;
+	char		*addr;
+	char		*path;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
+
+}				t_tex;
 
 typedef struct s_persona
 {
@@ -117,6 +132,9 @@ typedef struct s_raycaster
 	double		delta_dist_x;
 	double		delta_dist_y;
 	double		perp_wall_dist;
+	double		wall_x;
+	double		step_tex;
+	double		tex_pos;
 	int			map_x;
 	int			map_y;
 	int			step_x;
@@ -127,6 +145,8 @@ typedef struct s_raycaster
 	int			draw_start;
 	int			draw_end;
 	int			texture_img;
+	int			tex_x;
+	int			tex_y;
 }				t_raycaster;
 
 typedef struct s_game
@@ -135,6 +155,7 @@ typedef struct s_game
 	t_img			*imgptr;
 	t_persona		*persona;
 	t_raycaster		*raycaster;
+	t_tex			tex[4];
 	void			*mlx;
 	void			*wind;
 	bool			key_tab[6];
@@ -204,18 +225,23 @@ void		free_db_tab(char **tab);
 /// @brief Set hooks
 /// @param game Struct game
 void		set_hook(t_game *game);
+
 ///@brief Move up
 /// @param game Struct game
 void		move_up(t_game *game);
+
 ///@brief Move down
 /// @param game Struct game
 void		move_down(t_game *game);
+
 ///@brief Move right
 /// @param game Struct game
 void		move_right(t_game *game);
+
 ///@brief Move left
 /// @param game Struct game
 void		move_left(t_game *game);
+
 ///@brief Rotate
 /// @param persona Struct persona
 /// @param flag true or false
@@ -227,6 +253,7 @@ void		rotate(t_persona *persona, bool flag);
 /// @brief Draw pixel into the image
 ///	@param game Struct game
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
 /// @brief Draw colone into the image
 /// @param raycaster Struct raycaster
 ///	@param game Struct game
@@ -237,6 +264,7 @@ void		draw_colone(t_raycaster *raycaster, t_game *game, int x);
 /*GAME*/
 /*#####################################################*/
 int			game(t_data *data);
+
 /// @brief raycasting
 /// @param game Struct game
 void		raycasting(t_game *game);

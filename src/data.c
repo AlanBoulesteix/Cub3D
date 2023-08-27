@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:16:24 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/22 17:51:05 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:44:58 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_data	*init_data(void)
 		return (NULL);
 	}
 	data->map = NULL;
-	data->no_path = NULL;
-	data->so_path = NULL;
-	data->we_path = NULL;
-	data->ea_path = NULL;
+	data->no_tex_path = NULL;
+	data->so_tex_path = NULL;
+	data->we_tex_path = NULL;
+	data->ea_tex_path = NULL;
 	data->rgb_floor = NULL;
 	data->rgb_ceiling = NULL;
 	return (data);
@@ -34,14 +34,14 @@ t_data	*init_data(void)
 
 void	free_data(t_data *data)
 {
-	if (data->no_path)
-		free(data->no_path);
-	if (data->so_path)
-		free(data->so_path);
-	if (data->we_path)
-		free(data->we_path);
-	if (data->ea_path)
-		free(data->ea_path);
+	if (data->no_tex_path)
+		free(data->no_tex_path);
+	if (data->so_tex_path)
+		free(data->so_tex_path);
+	if (data->we_tex_path)
+		free(data->we_tex_path);
+	if (data->ea_tex_path)
+		free(data->ea_tex_path);
 	if (data->rgb_floor)
 		free(data->rgb_floor);
 	if (data->rgb_ceiling)
@@ -55,10 +55,10 @@ void	print_data(t_data *data)
 {
 	int	i;
 
-	printf("NO : %s\n", data->no_path);
-	printf("SO : %s\n", data->so_path);
-	printf("WE : %s\n", data->we_path);
-	printf("EA : %s\n", data->ea_path);
+	printf("NO : %s\n", data->no_tex_path);
+	printf("SO : %s\n", data->so_tex_path);
+	printf("WE : %s\n", data->we_tex_path);
+	printf("EA : %s\n", data->ea_tex_path);
 	printf("F : [%d:%d:%d]\n", data->rgb_floor[0],
 		data->rgb_floor[1], data->rgb_floor[2]);
 	printf("C : [%d:%d:%d]\n", data->rgb_ceiling[0],

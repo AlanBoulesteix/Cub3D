@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:05:13 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/22 18:40:08 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:44:58 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	check_side_texture(char *str, int side)
 
 int	check_texture(t_data *data)
 {
-	return (!data->no_path || !data->so_path
-		|| !data->we_path || !data->ea_path);
+	return (!data->no_tex_path || !data->so_tex_path
+		|| !data->we_tex_path || !data->ea_tex_path);
 }
