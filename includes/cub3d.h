@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/27 14:53:31 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:47:40 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 
 # define ERROR_ARG 1
 # define ERROR_EXTENSION 2
-
-# define ERROR_RGB 1
-# define ERROR_MAP 3
-
-# define ERROR_MLX 1
+# define ERROR_RGB 3
+# define ERROR_MAP 4
+# define ERROR_MALLOC 5
+# define ERROR_MLX 6
+# define ERROR_TEXT 7
 
 # define NORTH 0
 # define SOUTH 1
@@ -177,6 +177,11 @@ int			check_input(int ac, char **av);
 /// @param data Struct data
 /// @return 
 int			check_data(t_data *data);
+
+/// @brief Return 1 and write error
+/// @param error Error code
+/// @return 1
+int			printf_error(int error);
 /*#####################################################*/
 
 /*READ_FILE*/
@@ -268,6 +273,34 @@ int			game(t_data *data);
 /// @brief raycasting
 /// @param game Struct game
 void		raycasting(t_game *game);
+
+/// @brief Init struct game
+/// @param game pointer to struct game
+/// @param data pointer to struct data
+/// @return 0 or 1
+int			init_game(t_game *game, t_data *data);
+
+/// @brief Set game values
+/// @param game pointer to struct game
+/// @param data pointer to struct data
+void		start_game(t_game *game, t_data *data);
+
+/// @brief Set textures
+/// @param game pointer to struct game
+/// @param data pointer to struct data
+/// @return 0 or 1
+int			set_textures(t_game *game, t_data *data);
+
+/// @brief Set persona
+/// @param game pointer to struct game
+/// @param data pointer to struct data
+/// @return 0 or 1
+int			set_persona(t_game *game, t_data *data);
+
+/// @brief Set raycaster
+///	@param game pointer to struct game
+/// @return 0 or 1
+int			set_raycaster(t_game *game);
 /*#####################################################*/
 
 #endif

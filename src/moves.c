@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:04:52 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/23 17:08:03 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:56:41 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	move_up(t_game *game)
 		game->persona->pos_x += game->persona->dir_x * MOVESPEED;
 }
 
-void move_down(t_game *game)
+void	move_down(t_game *game)
 {
 	int		y;
 	int		x;

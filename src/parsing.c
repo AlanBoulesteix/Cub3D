@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 15:32:53 by aboulest          #+#    #+#             */
+/*   Updated: 2023/08/27 15:45:12 by aboulest         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include "libft.h"
 
@@ -17,15 +29,9 @@ int	check_extension(char *file)
 int	check_input(int ac, char **av)
 {
 	if (ac != 2)
-	{
-		printf("Error\nWrong number of arguments\n");
-		return (ERROR_ARG);
-	}
+		return (printf_error(ERROR_ARG));
 	else if (check_extension(av[1]))
-	{
-		printf("Error\nWrong file extension\n");
-		return (ERROR_EXTENSION);
-	}
+		return (printf_error(ERROR_EXTENSION));
 	return (0);
 }
 
@@ -34,19 +40,18 @@ int	check_rgb(t_data *data)
 	int	i;
 
 	i = -1;
-
 	while (++i < 3)
 	{
 		if (!data->rgb_ceiling
 			|| (data->rgb_ceiling[i] < 0 || data->rgb_ceiling[i] > 255))
-			return (ERROR_RGB);
+			return (printf_error(ERROR_RGB));
 	}
 	i = -1;
 	while (++i < 3)
 	{
-		if (!data->rgb_floor 
+		if (!data->rgb_floor
 			|| (data->rgb_floor[i] < 0 || data->rgb_ceiling[i] > 255))
-			return (ERROR_RGB);
+			return (printf_error(ERROR_RGB));
 	}
 	return (0);
 }
@@ -60,14 +65,8 @@ int	check_map(char **map)
 int	check_data(t_data *data)
 {
 	if (check_rgb(data))
-	{
-		printf("Error\nWrong RGB values\n");
-		return (ERROR_RGB);
-	}
+		return (1);
 	if (check_map(data->map))
-	{
-		printf("Error\nSomething went wrong with map\n");
-		return (ERROR_MAP);
-	}
+		return (printf_error(ERROR_MAP));
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/08/23 16:58:26 by aboulest         ###   ########.fr        #
+#    Updated: 2023/08/27 15:22:17 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ FILES			:= main.c \
 				str_utils.c \
 				parsing.c \
 				data.c \
-				mlx_utils.c \
+				game_utils.c \
+				init_game_values.c \
 				read_file_utils.c \
 				read_file.c \
 				hooks.c \
@@ -31,7 +32,6 @@ FILES			:= main.c \
 				moves.c \
 				rotate.c \
 				game.c \
-				# mini_map.c \
 
 
 SRC				= $(addprefix $(SRC_DIR), $(FILES))

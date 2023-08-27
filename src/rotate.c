@@ -6,7 +6,7 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:55:21 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/23 16:56:42 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:58:16 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	rotate_left(t_persona *perso)
 
 void	rotate(t_persona *perso, bool flag)
 {
-
 	if (flag)
 		rotate_right(perso);
 	else

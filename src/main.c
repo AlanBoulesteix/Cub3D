@@ -6,11 +6,30 @@
 /*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:09:44 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/22 18:39:41 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:49:08 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	printf_error(int error)
+{
+	if (error == ERROR_ARG)
+		ft_putstr_fd("Error\nWrong number of arguments\n", 2);
+	else if (error == ERROR_EXTENSION)
+		ft_putstr_fd("Error\nWrong file extension\n", 2);
+	else if (error == ERROR_RGB)
+		ft_putstr_fd("Error\nWrong RGB\n", 2);
+	else if (error == ERROR_MAP)
+		ft_putstr_fd("Error\nWrong map\n", 2);
+	else if (error == ERROR_MALLOC)
+		ft_putstr_fd("Error\nMalloc failed\n", 2);
+	else if (error == ERROR_MLX)
+		ft_putstr_fd("Error\nMlx failed\n", 2);
+	else if (error == ERROR_TEXT)
+		ft_putstr_fd("Error\nWrong texture\n", 2);
+	return (1);
+}
 
 int	main(int ac, char *av[])
 {
