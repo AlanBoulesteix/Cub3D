@@ -65,13 +65,13 @@ int	read_info_write_in_data(int fd, t_data *data)
 	{
 		line = get_next_line(fd);
 		if (!data->no_tex_path && check_side_texture(line, NORTH))
-			data->no_tex_path = ft_strdup(line + 2);
+			data->no_tex_path = get_path(line);
 		else if (!data->so_tex_path && check_side_texture(line, SOUTH))
-			data->so_tex_path = ft_strdup(line + 2);
+			data->so_tex_path = get_path(line);
 		else if (!data->we_tex_path && check_side_texture(line, WEST))
-			data->we_tex_path = ft_strdup(line + 2);
+			data->we_tex_path = get_path(line);
 		else if (!data->ea_tex_path && check_side_texture(line, EAST))
-			data->ea_tex_path = ft_strdup(line + 2);
+			data->ea_tex_path = get_path(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'F' && !data->rgb_floor)
 			data->rgb_floor = find_rgb(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)

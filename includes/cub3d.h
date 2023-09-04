@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 16:32:44 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:50:29 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,11 @@ t_data		*read_file(char *str);
 /// @param map Map as a char*
 /// @return 0 or 1
 int			check_map_empty_line(char *map);
+
+/// @brief get path of texture
+/// @param line line of the file
+/// @return path of texture
+char		*get_path(char *line);
 
 /*#####################################################*/
 
