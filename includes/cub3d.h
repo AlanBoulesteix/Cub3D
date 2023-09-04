@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 15:43:33 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:32:44 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,12 @@ int			check_data_map(char **map);
 /// @param str Path of the file
 /// @return t_data*
 t_data		*read_file(char *str);
+
+/// @brief Check if theres an empty line in the map before it gets stored
+/// @param map Map as a char*
+/// @return 0 or 1
+int			check_map_empty_line(char *map);
+
 /*#####################################################*/
 
 /*FILL_DATA_MAP*/

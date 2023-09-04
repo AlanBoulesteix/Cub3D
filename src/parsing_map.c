@@ -6,12 +6,28 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:51 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/04 15:28:56 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:33:09 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
+
+int	check_map_empty_line(char *map)
+{
+	int	i;
+
+	i = -1;
+	while (map[++i])
+	{
+		if (i > 0 && map[i] == '\n' && map[i + 1] && map[i + 1] == '\n')
+		{
+			printf_error(ERROR_EMPTY_LINE);
+			return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
 
 static int	ft_tablen(char **tab)
 {

@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 16:12:24 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:31:22 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,12 @@ char	*write_in_map(char *map, char *line)
 	return (map);
 }
 
-int	check_map_empty_line(char *map)
+int	check_line(char *line)
 {
-	int	i;
-
-	i = -1;
-	while (map[++i])
-	{
-		if (i > 0 && map[i] == '\n' && map[i + 1] && map[i + 1] == '\n')
-		{
-			printf_error(ERROR_EMPTY_LINE);
-			return (EXIT_FAILURE);
-		}
-	}
-	return (EXIT_SUCCESS);
+	if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'
+			|| line[0] == '\n'))
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 int	write_in_data(char *map, t_data *data)
@@ -64,10 +56,11 @@ int	write_in_data(char *map, t_data *data)
 
 int	read_info_write_in_data(int fd, t_data *data)
 {
-	char	*line;
 	char	*map;
+	char	*line;
 
 	line = "start";
+	map = NULL;
 	while (line)
 	{
 		line = get_next_line(fd);
@@ -83,8 +76,7 @@ int	read_info_write_in_data(int fd, t_data *data)
 			data->rgb_floor = find_rgb(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
 			data->rgb_ceiling = find_rgb(line);
-		else if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'
-				|| line[0] == '\n'))
+		else if (check_line(line) == EXIT_SUCCESS)
 			map = write_in_map(map, line);
 		free(line);
 	}
