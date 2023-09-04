@@ -5,4 +5,3 @@ lib/*/*.a
 lib/*/*.o
 *.o
 cub3d
-*.cub
