@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 14:12:02 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:12:24 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,41 @@ char	*write_in_map(char *map, char *line)
 	return (map);
 }
 
-void	write_in_data(char *map, t_data *data)
+int	check_map_empty_line(char *map)
 {
+	int	i;
+
+	i = -1;
+	while (map[++i])
+	{
+		if (i > 0 && map[i] == '\n' && map[i + 1] && map[i + 1] == '\n')
+		{
+			printf_error(ERROR_EMPTY_LINE);
+			return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	write_in_data(char *map, t_data *data)
+{
+	if (check_map_empty_line(map))
+		return (free(map), EXIT_FAILURE);
 	data->map = ft_split(map, '\n');
 	free(map);
 	data->no_tex_path[ft_strlen(data->no_tex_path) - 1] = '\0';
 	data->so_tex_path[ft_strlen(data->so_tex_path) - 1] = '\0';
 	data->ea_tex_path[ft_strlen(data->ea_tex_path) - 1] = '\0';
 	data->we_tex_path[ft_strlen(data->we_tex_path) - 1] = '\0';
+	return (EXIT_SUCCESS);
 }
 
-void	read_info_write_in_data(int fd, t_data *data)
+int	read_info_write_in_data(int fd, t_data *data)
 {
 	char	*line;
 	char	*map;
 
 	line = "start";
-	map = NULL;
 	while (line)
 	{
 		line = get_next_line(fd);
@@ -65,11 +83,12 @@ void	read_info_write_in_data(int fd, t_data *data)
 			data->rgb_floor = find_rgb(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
 			data->rgb_ceiling = find_rgb(line);
-		else if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'))
+		else if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'
+				|| line[0] == '\n'))
 			map = write_in_map(map, line);
 		free(line);
 	}
-	write_in_data(map, data);
+	return (write_in_data(map, data));
 }
 
 t_data	*read_file(char *str)
@@ -89,7 +108,8 @@ t_data	*read_file(char *str)
 		close(fd);
 		exit(EXIT_FAILURE);
 	}
-	read_info_write_in_data(fd, data);
+	if (read_info_write_in_data(fd, data))
+		return (close(fd), free_data(data), NULL);
 	close(fd);
 	fill_map(data);
 	return (data);

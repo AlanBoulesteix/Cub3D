@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:32:53 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 14:15:20 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:46:44 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,11 @@ int	check_rgb(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	check_map(char **map)
-{
-	(void)map;
-	return (EXIT_SUCCESS);
-}
-
 int	check_data(t_data *data)
 {
 	if (check_rgb(data))
-		return (1);
-	if (check_map(data->map))
+		return (EXIT_FAILURE);
+	if (check_data_map(data->map))
 		return (printf_error(ERROR_MAP));
 	return (0);
 }

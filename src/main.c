@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:09:44 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 14:15:50 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:44:01 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	printf_error(int error)
 		ft_putstr_fd("Error\nMlx failed\n", 2);
 	else if (error == ERROR_TEXT)
 		ft_putstr_fd("Error\nWrong texture\n", 2);
+	else if (error == ERROR_EMPTY_LINE)
+		ft_putstr_fd("Error\nEmpty line in map\n", 2);
 	return (EXIT_FAILURE);
 }
 

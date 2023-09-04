@@ -21,6 +21,7 @@ FILES			:= main.c \
 				get_next_line_utils.c \
 				str_utils.c \
 				parsing.c \
+				parsing_map.c \
 				data.c \
 				fill_data_map.c \
 				game_utils.c \

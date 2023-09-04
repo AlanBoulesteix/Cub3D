@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 14:13:49 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:43:33 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define ERROR_MALLOC 5
 # define ERROR_MLX 6
 # define ERROR_TEXT 7
+# define ERROR_EMPTY_LINE 8
 
 # define NORTH 0
 # define SOUTH 1
@@ -182,6 +183,12 @@ int			check_data(t_data *data);
 /// @param error Error code
 /// @return 1
 int			printf_error(int error);
+
+/// @brief check if the map stored in data is correct
+/// @param map Map stored in data
+/// @return 0 or 1
+int			check_data_map(char **map);
+
 /*#####################################################*/
 
 /*READ_FILE*/
