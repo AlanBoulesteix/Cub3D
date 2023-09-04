@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:05:13 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/24 16:44:58 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:54:49 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_intlen(int n)
 	return (len);
 }
 
-int *find_rgb(char *line)//@TODO: check if not int 
+int	*find_rgb(char *line)
 {
 	int	*rgb;
 

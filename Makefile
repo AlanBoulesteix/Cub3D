@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
+#    By: chmadran <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/08/27 15:22:17 by aboulest         ###   ########.fr        #
+#    Updated: 2023/09/04 14:13:10 by chmadran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FILES			:= main.c \
 				str_utils.c \
 				parsing.c \
 				data.c \
+				fill_data_map.c \
 				game_utils.c \
 				init_game_values.c \
 				read_file_utils.c \

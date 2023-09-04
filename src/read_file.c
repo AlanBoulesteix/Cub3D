@@ -3,28 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/24 17:53:21 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:12:02 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "get_next_line.h"
 
-int	check_side_texture(char *str, int side);
-int *find_rgb(char *line);
+int		check_side_texture(char *str, int side);
+int		*find_rgb(char *line);
+
+char	*write_in_map(char *map, char *line)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (!map)
+		map = ft_strdup(line);
+	else
+	{
+		tmp = ft_strdup(map);
+		free(map);
+		map = ft_strjoin(tmp, line);
+		free(tmp);
+	}
+	return (map);
+}
+
+void	write_in_data(char *map, t_data *data)
+{
+	data->map = ft_split(map, '\n');
+	free(map);
+	data->no_tex_path[ft_strlen(data->no_tex_path) - 1] = '\0';
+	data->so_tex_path[ft_strlen(data->so_tex_path) - 1] = '\0';
+	data->ea_tex_path[ft_strlen(data->ea_tex_path) - 1] = '\0';
+	data->we_tex_path[ft_strlen(data->we_tex_path) - 1] = '\0';
+}
 
 void	read_info_write_in_data(int fd, t_data *data)
 {
 	char	*line;
 	char	*map;
-	char	*tmp;
 
 	line = "start";
 	map = NULL;
-	while(line)
+	while (line)
 	{
 		line = get_next_line(fd);
 		if (!data->no_tex_path && check_side_texture(line, NORTH))
@@ -39,26 +65,11 @@ void	read_info_write_in_data(int fd, t_data *data)
 			data->rgb_floor = find_rgb(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
 			data->rgb_ceiling = find_rgb(line);
-		else if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'))//@TODO : Fix a faire quand map entre-coupe d'une ligne
-		{
-			if (!map)
-				map = ft_strdup(line);
-			else
-			{
-				tmp = ft_strdup(map);
-				free(map);
-				map = ft_strjoin(tmp, line);
-				free(tmp);
-			}
-		}
+		else if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'))
+			map = write_in_map(map, line);
 		free(line);
 	}
-	data->map = ft_split(map, '\n');
-	free(map);
-	data->no_tex_path[ft_strlen(data->no_tex_path) - 1] = '\0';
-	data->so_tex_path[ft_strlen(data->so_tex_path) - 1] = '\0';
-	data->ea_tex_path[ft_strlen(data->ea_tex_path) - 1] = '\0';
-	data->we_tex_path[ft_strlen(data->we_tex_path) - 1] = '\0';
+	write_in_data(map, data);
 }
 
 t_data	*read_file(char *str)
@@ -80,51 +91,6 @@ t_data	*read_file(char *str)
 	}
 	read_info_write_in_data(fd, data);
 	close(fd);
-
-	//@TODO : SLICE FUNCTION
-	int i = -1;
-	int	j;
-	while (data->map[++i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			if (data->map[i][j] == 'S' ||data->map[i][j] == 'N' ||
-			data->map[i][j] == 'E' ||data->map[i][j] == 'W')
-			{
-				data->pos_x = j;
-				data->pos_y = i;
-				if (data->map[i][j] == 'N')
-				{
-					data->delta_x = 0;
-					data->delta_y = -1;
-					data->plane_x = 0.66;
-					data->plane_y = 0.00;
-				}
-				else if (data->map[i][j] == 'S')
-				{
-					data->delta_x = 0;
-					data->delta_y = 1;
-					data->plane_x = -0.66;
-					data->plane_y = 0.00;
-				}
-				else if (data->map[i][j] == 'E')
-				{
-					data->delta_x = 1;
-					data->delta_y = 0;
-					data->plane_x = 0.00;
-					data->plane_y = 0.66;
-				}
-				else if (data->map[i][j] == 'W')
-				{
-					data->delta_x = -1;
-					data->delta_y = 0;
-					data->plane_x = 0.00;
-					data->plane_y = -0.66;
-				}
-			}
-			j++;
-		}
-	}
+	fill_map(data);
 	return (data);
 }
