@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/27 15:47:40 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:13:49 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,14 @@ int			printf_error(int error);
 /// @param str Path of the file
 /// @return t_data*
 t_data		*read_file(char *str);
+/*#####################################################*/
+
+/*FILL_DATA_MAP*/
+/*#####################################################*/
+/// @brief Fill the map in the struct data
+/// @param data Struct data
+/// @return
+void		fill_map(t_data *data);
 /*#####################################################*/
 
 /*DATA*/
