@@ -12,3 +12,5 @@
 - tester 111
          1N1
 		 111
+
+- int	check_character(char character) use ft_isspace instead?

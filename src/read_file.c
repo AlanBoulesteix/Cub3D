@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 09:25:49 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:40:35 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ char	*write_in_map(char *map, char *line)
 		free(tmp);
 	}
 	return (map);
-}
-
-int	check_line(char *line)
-{
-	if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'
-			|| line[0] == '\n'))
-		return (EXIT_SUCCESS);
-	return (EXIT_FAILURE);
 }
 
 int	write_in_data(char *map, t_data *data)
@@ -83,6 +75,31 @@ int	read_info_write_in_data(int fd, t_data *data)
 	return (write_in_data(map, data));
 }
 
+void	fill_map_spaces(t_data *data)
+{
+	int		i;
+	int		j;
+	char	**new_map;
+	int		longest_len;
+
+	i = -1;
+	longest_len = ft_longest_len_tab(data->map);
+	new_map = malloc(sizeof(char *) * (ft_tablen(data->map) + 1));
+	while (data->map[++i])
+	{
+		new_map[i] = malloc(sizeof(char) * (longest_len + 1));
+		j = -1;
+		while (data->map[i][++j])
+			new_map[i][j] = data->map[i][j];
+		while (j < longest_len)
+			new_map[i][j++] = ' ';
+		new_map[i][j] = '\0';
+	}
+	new_map[i] = NULL;
+	free_db_tab(data->map);
+	data->map = new_map;
+}
+
 t_data	*read_file(char *str)
 {
 	int		fd;
@@ -103,6 +120,7 @@ t_data	*read_file(char *str)
 	if (read_info_write_in_data(fd, data))
 		return (close(fd), free_data(data), NULL);
 	close(fd);
-	fill_map(data);
+	fill_map_coordinate(data);
+	fill_map_spaces(data);
 	return (data);
 }

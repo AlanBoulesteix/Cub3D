@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 09:00:27 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:38:42 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,11 @@ int			check_data_map(char **map);
 /// @return 0 or 1
 int			ft_tablen(char **tab);
 
+/// @brief checks if the character sent is not a space 
+/// @param character the map character to be checked
+/// @return 0 or 1
+int			check_character(char character);
+
 /*#####################################################*/
 
 /*READ_FILE*/
@@ -215,12 +220,26 @@ char		*get_path(char *line);
 
 /*#####################################################*/
 
+/*READ_FILE_UTILS2*/
+/*#####################################################*/
+/// @brief Check if the line is valid
+/// @param line line of the file
+/// @return 0 or 1
+int			check_line(char *line);
+
+/// @brief Get the longest line of the map
+/// @param map Map as a char**
+/// @return length of the longest line
+int			ft_longest_len_tab(char **map);
+
+/*#####################################################*/
+
 /*FILL_DATA_MAP*/
 /*#####################################################*/
 /// @brief Fill the map in the struct data
 /// @param data Struct data
 /// @return
-void		fill_map(t_data *data);
+void		fill_map_coordinate(t_data *data);
 /*#####################################################*/
 
 /*DATA*/

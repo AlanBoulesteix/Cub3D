@@ -6,7 +6,7 @@
 #    By: chmadran <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/09/05 09:16:51 by chmadran         ###   ########.fr        #
+#    Updated: 2023/09/05 11:37:07 by chmadran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILES			:= main.c \
 				game_utils.c \
 				init_game_values.c \
 				read_file_utils.c \
+				read_file_utils2.c \
 				read_file.c \
 				hooks.c \
 				drawing.c \

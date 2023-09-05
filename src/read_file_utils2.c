@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_map_utils.c                                :+:      :+:    :+:   */
+/*   read_file_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 08:51:03 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/05 11:32:41 by chmadran         ###   ########.fr       */
+/*   Created: 2023/09/05 11:36:04 by chmadran          #+#    #+#             */
+/*   Updated: 2023/09/05 11:36:50 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft.h"
 
-int	check_character(char character)
+int	check_line(char *line)
 {
-	if (character && character != ' ' && character != '\t')
+	if (line && (line[0] == '1' || line[0] == ' ' || line[0] == '0'
+			|| line[0] == '\n'))
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }
 
-int	ft_tablen(char **tab)
+int	ft_longest_len_tab(char **map)
 {
-	int	i;
+	int		i;
+	int		temp_len;
+	int		longest_len;
 
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
+	i = -1;
+	longest_len = 0;
+	temp_len = 0;
+	while (map[++i])
+	{
+		temp_len = ft_strlen(map[i]);
+		if (temp_len > longest_len)
+			longest_len = temp_len;
+	}
+	return (longest_len);
 }
