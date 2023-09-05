@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:09:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 18:49:43 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:08:46 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_path(char *line)
 	path = ft_strchr(line, '.');
 	if (!path)
 		path = ft_strchr(line, '/');
+	if (!path)
+		return (NULL);
 	new_path = ft_strdup(path);
 	return (new_path);
 }
