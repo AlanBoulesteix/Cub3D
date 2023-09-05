@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:09:44 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 15:44:01 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:51:23 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int ac, char *av[])
 		return (EXIT_FAILURE);
 	if (check_data(data))
 		return (free_data(data), EXIT_FAILURE);
-	print_data(data);
 	game(data);
 	free_data(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:05:13 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 13:49:54 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:54:36 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int		count_sep(char *line);
 bool	rgb_is_valid(char *line);
 int		ft_int_len(int nb);
+
+static void	init_rgb(int *rgb)
+{
+	rgb[0] = -1;
+	rgb[1] = -1;
+	rgb[2] = -1;
+}
 
 int	*find_rgb(char *line)
 {
@@ -25,9 +32,9 @@ int	*find_rgb(char *line)
 	i = 0;
 	k = 0;
 	rgb = malloc(sizeof(int) * 3);
-	rgb[0] = -1;
-	rgb[1] = -1;
-	rgb[2] = -1;
+	if (!rgb)
+		return (NULL);
+	init_rgb(rgb);
 	if (!rgb_is_valid(line))
 		return (rgb);
 	while (line[i])

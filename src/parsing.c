@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:32:53 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 15:46:44 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:24:08 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_rgb(t_data *data)
 	while (++i < 3)
 	{
 		if (!data->rgb_floor
-			|| (data->rgb_floor[i] < 0 || data->rgb_ceiling[i] > 255))
+			|| (data->rgb_floor[i] < 0 || data->rgb_floor[i] > 255))
 			return (printf_error(ERROR_RGB));
 	}
 	return (EXIT_SUCCESS);

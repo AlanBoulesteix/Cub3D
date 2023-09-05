@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:16:24 by aboulest          #+#    #+#             */
-/*   Updated: 2023/08/24 16:44:58 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:51:16 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,39 @@ void	free_data(t_data *data)
 	free(data);
 }
 
-void	print_data(t_data *data)
-{
-	int	i;
+// void	print_data(t_data *data)
+// {
+// 	int	i;
 
-	printf("NO : %s\n", data->no_tex_path);
-	printf("SO : %s\n", data->so_tex_path);
-	printf("WE : %s\n", data->we_tex_path);
-	printf("EA : %s\n", data->ea_tex_path);
-	printf("F : [%d:%d:%d]\n", data->rgb_floor[0],
-		data->rgb_floor[1], data->rgb_floor[2]);
-	printf("C : [%d:%d:%d]\n", data->rgb_ceiling[0],
-		data->rgb_ceiling[1], data->rgb_ceiling[2]);
-	i = -1;
-	while (data->map[++i])
-		printf("%s\n", data->map[i]);
-}
+// 	printf("NO : %s\n", data->no_tex_path);
+// 	printf("SO : %s\n", data->so_tex_path);
+// 	printf("WE : %s\n", data->we_tex_path);
+// 	printf("EA : %s\n", data->ea_tex_path);
+// 	printf("F : [%d:%d:%d]\n", data->rgb_floor[0],
+// 		data->rgb_floor[1], data->rgb_floor[2]);
+// 	printf("C : [%d:%d:%d]\n", data->rgb_ceiling[0],
+// 		data->rgb_ceiling[1], data->rgb_ceiling[2]);
+// 	i = -1;
+// 	while (data->map[++i])
+// 		printf("%s\n", data->map[i]);
+// }
+
+// void	print_map(char **map)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = -1;
+// 	while (map[++i])
+// 	{
+// 		j = -1;
+// 		while (map[i][++j])
+// 		{
+// 			if (map[i][j] == ' ')
+// 				printf("S");
+// 			else if (map[i][j])
+// 				printf("%c", map[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
+// }

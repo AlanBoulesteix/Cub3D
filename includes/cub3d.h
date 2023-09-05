@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 14:18:24 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:05:27 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@
 # define W_HEIGHT 1080
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
-# define MOVESPEED 0.1
-# define ROTSPEED 0.1
+# define MOVESPEED 0.05
+# define ROTSPEED 0.05
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -237,6 +237,10 @@ int			ft_longest_len_tab(char **map);
 /// @return 0 or 1
 int			check_map_start(t_data *data, char *line,
 				char *map);
+
+/// @brief Fill the map with spaces
+/// @param data Struct data
+void		fill_map_spaces(t_data *data);
 
 /*#####################################################*/
 

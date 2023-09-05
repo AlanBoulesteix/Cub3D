@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:47:24 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 14:52:03 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:28:46 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	count_nb_int(char *line)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	if (count > 4)
+	if (count > 3)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

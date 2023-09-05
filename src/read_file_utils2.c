@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:36:04 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/05 14:17:31 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:04:52 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,33 @@ int	ft_longest_len_tab(char **map)
 			longest_len = temp_len;
 	}
 	return (longest_len);
+}
+
+void	fill_map_spaces(t_data *data)
+{
+	int		i;
+	int		j;
+	char	**new_map;
+	int		longest_len;
+
+	i = -1;
+	longest_len = ft_longest_len_tab(data->map);
+	new_map = malloc(sizeof(char *) * (ft_tablen(data->map) + 1));
+	if (!new_map)
+		return ;
+	while (data->map[++i])
+	{
+		new_map[i] = malloc(sizeof(char) * (longest_len + 1));
+		if (!new_map[i])
+			return (free_db_tab(new_map));
+		j = -1;
+		while (data->map[i][++j])
+			new_map[i][j] = data->map[i][j];
+		while (j < longest_len)
+			new_map[i][j++] = ' ';
+		new_map[i][j] = '\0';
+	}
+	new_map[i] = NULL;
+	free_db_tab(data->map);
+	data->map = new_map;
 }

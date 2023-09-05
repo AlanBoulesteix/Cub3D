@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 14:17:23 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:20:40 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,21 @@ int	write_in_data(char *map, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	fill_texture(t_data *data, char *line)
+{
+	if (!data->no_tex_path && check_side_texture(line, NORTH))
+		data->no_tex_path = get_path(line);
+	else if (!data->so_tex_path && check_side_texture(line, SOUTH))
+		data->so_tex_path = get_path(line);
+	else if (!data->we_tex_path && check_side_texture(line, WEST))
+		data->we_tex_path = get_path(line);
+	else if (!data->ea_tex_path && check_side_texture(line, EAST))
+		data->ea_tex_path = get_path(line);
+	else
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 int	read_info_write_in_data(int fd, t_data *data)
 {
 	char	*map;
@@ -56,48 +71,17 @@ int	read_info_write_in_data(int fd, t_data *data)
 	while (line)
 	{
 		line = get_next_line(fd);
-		if (!data->no_tex_path && check_side_texture(line, NORTH))
-			data->no_tex_path = get_path(line);
-		else if (!data->so_tex_path && check_side_texture(line, SOUTH))
-			data->so_tex_path = get_path(line);
-		else if (!data->we_tex_path && check_side_texture(line, WEST))
-			data->we_tex_path = get_path(line);
-		else if (!data->ea_tex_path && check_side_texture(line, EAST))
-			data->ea_tex_path = get_path(line);
+		if (fill_texture(data, line) == EXIT_SUCCESS)
+			;
 		else if (ft_strlen(line) > 0 && line[0] == 'F' && !data->rgb_floor)
 			data->rgb_floor = find_rgb(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
 			data->rgb_ceiling = find_rgb(line);
-		else if (check_map_start(data, line, map) == EXIT_SUCCESS)
+		else if (line && check_map_start(data, line, map) == EXIT_SUCCESS)
 			map = write_in_map(map, line);
 		free(line);
 	}
 	return (write_in_data(map, data));
-}
-
-void	fill_map_spaces(t_data *data)
-{
-	int		i;
-	int		j;
-	char	**new_map;
-	int		longest_len;
-
-	i = -1;
-	longest_len = ft_longest_len_tab(data->map);
-	new_map = malloc(sizeof(char *) * (ft_tablen(data->map) + 1));
-	while (data->map[++i])
-	{
-		new_map[i] = malloc(sizeof(char) * (longest_len + 1));
-		j = -1;
-		while (data->map[i][++j])
-			new_map[i][j] = data->map[i][j];
-		while (j < longest_len)
-			new_map[i][j++] = ' ';
-		new_map[i][j] = '\0';
-	}
-	new_map[i] = NULL;
-	free_db_tab(data->map);
-	data->map = new_map;
 }
 
 t_data	*read_file(char *str)
