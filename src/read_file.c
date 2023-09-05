@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 16:31:22 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 09:25:49 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "get_next_line.h"
 
 int		check_side_texture(char *str, int side);
-int		*find_rgb(char *line);
+int		*find_rgb(char *line, char identifier);
 
 char	*write_in_map(char *map, char *line)
 {
@@ -73,9 +73,9 @@ int	read_info_write_in_data(int fd, t_data *data)
 		else if (!data->ea_tex_path && check_side_texture(line, EAST))
 			data->ea_tex_path = get_path(line);
 		else if (ft_strlen(line) > 0 && line[0] == 'F' && !data->rgb_floor)
-			data->rgb_floor = find_rgb(line);
+			data->rgb_floor = find_rgb(line, 'F');
 		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
-			data->rgb_ceiling = find_rgb(line);
+			data->rgb_ceiling = find_rgb(line, 'C');
 		else if (check_line(line) == EXIT_SUCCESS)
 			map = write_in_map(map, line);
 		free(line);

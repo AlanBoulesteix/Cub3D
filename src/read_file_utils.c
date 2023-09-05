@@ -6,38 +6,38 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:05:13 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 13:54:49 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 10:37:17 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	ft_intlen(int n)
+int	*find_rgb(char *line, char identifier)
 {
-	int	len;
-
-	len = 0;
-	while (n > 0)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}
-
-int	*find_rgb(char *line)
-{
+	int	i;
+	int	k;
 	int	*rgb;
 
+	i = 0;
+	k = 0;
 	rgb = malloc(sizeof(int) * 3);
 	rgb[0] = -1;
 	rgb[1] = -1;
 	rgb[2] = -1;
-	if (ft_strlen(line) < 8 || ft_strlen(line) > 14)
-		return (rgb);
-	rgb[0] = ft_atoi(line + 2);
-	rgb[1] = ft_atoi(line + 2 + ft_intlen(rgb[0]) + 1);
-	rgb[2] = ft_atoi(line + 2 + ft_intlen(rgb[0]) + 1 + ft_intlen(rgb[1]) + 1);
+	while (line[i] && line[i] != identifier)
+		i++;
+	while (line[i])
+	{
+		if (ft_isdigit(line[i]) && line[i + 3])
+		{
+			rgb[k++] = ft_atoi(&line[i]);
+			while (k < 3 && line[i] && ft_isdigit(line[i]))
+				i++;
+		}
+		if (!line[i])
+			return (rgb);
+		i++;
+	}
 	return (rgb);
 }
 
