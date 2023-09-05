@@ -6,7 +6,7 @@
 #    By: chmadran <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/09/04 14:13:10 by chmadran         ###   ########.fr        #
+#    Updated: 2023/09/05 09:16:51 by chmadran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FILES			:= main.c \
 				str_utils.c \
 				parsing.c \
 				parsing_map.c \
+				parsing_map_utils.c \
 				data.c \
 				fill_data_map.c \
 				game_utils.c \
