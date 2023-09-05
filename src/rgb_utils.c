@@ -6,11 +6,13 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:47:24 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 16:28:46 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:04:30 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		*find_rgb(char *line);
 
 int	valid_sep(char *line)
 {
@@ -86,4 +88,29 @@ int	ft_int_len(int nb)
 		nb /= 10;
 	}
 	return (i);
+}
+
+int	fill_rgb(char *line, t_data *data)
+{
+	if (line[0] == 'F')
+	{
+		if (!data->rgb_floor)
+			data->rgb_floor = find_rgb(line);
+		else
+		{
+			ft_putstr_fd("Error\nMultiple RGB fill\n", 2);
+			return (EXIT_FAILURE);
+		}
+	}
+	else if (line[0] == 'C')
+	{
+		if (!data->rgb_ceiling)
+			data->rgb_ceiling = find_rgb(line);
+		else
+		{
+			ft_putstr_fd("Error\nMultiple RGB fill\n", 2);
+			return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS);
 }

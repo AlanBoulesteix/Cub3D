@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 17:05:27 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:47:18 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define ERROR_MLX 6
 # define ERROR_TEXT 7
 # define ERROR_EMPTY_LINE 8
+# define NO_PATH 9
 
 # define NORTH 0
 # define SOUTH 1
@@ -217,6 +218,12 @@ int			check_map_empty_line(char *map);
 /// @param line line of the file
 /// @return path of texture
 char		*get_path(char *line);
+
+/// @brief Check if the line is a texture
+/// @param line line of the file
+/// @param data Struct data
+/// @return 0 or 1
+int			fill_rgb(char *line, t_data *data);
 
 /*#####################################################*/
 

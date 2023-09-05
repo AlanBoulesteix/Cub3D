@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:12:36 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 17:20:40 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:02:25 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,17 @@ char	*write_in_map(char *map, char *line)
 	return (map);
 }
 
-int	write_in_data(char *map, t_data *data)
+int	write_in_data(char *map, t_data *data, int error)
 {
+	if (error == 1)
+		return (free(map), EXIT_FAILURE);
 	if (check_map_empty_line(map))
 		return (free(map), EXIT_FAILURE);
 	data->map = ft_split(map, '\n');
 	free(map);
+	if (!data->no_tex_path || !data->so_tex_path || !data->ea_tex_path
+		|| !data->we_tex_path || !data->rgb_floor || !data->rgb_ceiling)
+		return (printf_error(NO_PATH), EXIT_FAILURE);
 	data->no_tex_path[ft_strlen(data->no_tex_path) - 1] = '\0';
 	data->so_tex_path[ft_strlen(data->so_tex_path) - 1] = '\0';
 	data->ea_tex_path[ft_strlen(data->ea_tex_path) - 1] = '\0';
@@ -65,23 +70,26 @@ int	read_info_write_in_data(int fd, t_data *data)
 {
 	char	*map;
 	char	*line;
+	int		error;
 
 	line = "start";
 	map = NULL;
+	error = 0;
 	while (line)
 	{
 		line = get_next_line(fd);
 		if (fill_texture(data, line) == EXIT_SUCCESS)
 			;
-		else if (ft_strlen(line) > 0 && line[0] == 'F' && !data->rgb_floor)
-			data->rgb_floor = find_rgb(line);
-		else if (ft_strlen(line) > 0 && line[0] == 'C' && !data->rgb_ceiling)
-			data->rgb_ceiling = find_rgb(line);
+		else if (ft_strlen(line) > 0 && (line[0] == 'F' || line[0] == 'C'))
+		{
+			if (error == 0 && fill_rgb(line, data) == EXIT_FAILURE)
+				error = 1;
+		}
 		else if (line && check_map_start(data, line, map) == EXIT_SUCCESS)
 			map = write_in_map(map, line);
 		free(line);
 	}
-	return (write_in_data(map, data));
+	return (write_in_data(map, data, error));
 }
 
 t_data	*read_file(char *str)
