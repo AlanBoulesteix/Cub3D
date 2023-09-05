@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 08:51:03 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/05 11:32:41 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:26:17 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 int	check_character(char character)
 {
-	if (character && character != ' ' && character != '\t')
+	if (!character)
+		return (EXIT_FAILURE);
+	if (character != ' ')
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }

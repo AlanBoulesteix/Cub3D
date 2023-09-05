@@ -14,3 +14,23 @@
 		 111
 
 - int	check_character(char character) use ft_isspace instead?
+
+void	print_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == ' ')
+				printf("S");
+			else if (map[i][j])
+				printf("%c", map[i][j]);
+		}
+		printf("\n");
+	}
+}
