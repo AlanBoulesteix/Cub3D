@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:51 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/05 08:59:02 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:34:52 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ static int	check_surrounding_walls(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (i == 0 || i == (int)ft_tablen(map) - 1)
+			if (map[i][j] == '0')
 			{
-				if (map[i][j] != '1' && map[i][j] != ' ')
-					return (EXIT_FAILURE);
-			}
-			else if (j == 0 || j == (int)ft_strlen(map[i]) - 1)
-			{
-				if (map[i][j] != '1' && map[i][j] != ' ')
+				if (check_character(map[i - 1][j])
+					|| check_character(map[i - 1][j - 1])
+					|| check_character(map[i - 1][j + 1])
+					|| check_character(map[i][j - 1])
+					|| check_character(map[i][j + 1])
+					|| check_character(map[i + 1][j])
+					|| check_character(map[i + 1][j - 1])
+					|| check_character(map[i + 1][j + 1]))
 					return (EXIT_FAILURE);
 			}
 		}

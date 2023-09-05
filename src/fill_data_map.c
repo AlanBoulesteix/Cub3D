@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:08:54 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/04 14:14:12 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 10:52:54 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	fill_delta_plane_ew(t_data *data, double x, double y)
 	data->plane_y = y;
 }
 
-void	fill_map(t_data *data)
+void	fill_map_coordinate(t_data *data)
 {
 	int	i;
 	int	j;

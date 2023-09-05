@@ -6,12 +6,11 @@
 #    By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 13:51:05 by aboulest          #+#    #+#              #
-#    Updated: 2023/09/05 13:51:45 by aboulest         ###   ########.fr        #
+#    Updated: 2023/09/05 13:55:43 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-NAME 			:= cub3d	
+NAME 			:= cub3D	
 
 SRC_DIR			= src/
 INCLUDES_DIR	= includes/
@@ -29,6 +28,7 @@ FILES			:= main.c \
 				init_game_values.c \
 				rgb_utils.c \
 				read_file_utils.c \
+				read_file_utils2.c \
 				read_file.c \
 				hooks.c \
 				drawing.c \
@@ -49,7 +49,7 @@ MAKE_LIBFT		= make -C lib/libft/
 
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -MMD -g3 -pthread
-INCLUDES		= -I$(INCLUDES_DIR) -Ilib/libft/ -I$(INCLUDES_DIR)cub3d -I$(INCLUDES_DIR)get_next_line
+INCLUDES		= -I$(INCLUDES_DIR) -Ilib/libft/ -I$(INCLUDES_DIR)cub3D -I$(INCLUDES_DIR)get_next_line
 
 RM				= rm -rf
 DIR_DUP			= mkdir $(OBJ_DIR)
