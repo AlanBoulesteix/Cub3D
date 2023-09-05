@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aboulest <aboulest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:05:13 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 10:37:17 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:49:54 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	*find_rgb(char *line, char identifier)
+int		count_sep(char *line);
+bool	rgb_is_valid(char *line);
+int		ft_int_len(int nb);
+
+int	*find_rgb(char *line)
 {
 	int	i;
 	int	k;
@@ -24,15 +28,15 @@ int	*find_rgb(char *line, char identifier)
 	rgb[0] = -1;
 	rgb[1] = -1;
 	rgb[2] = -1;
-	while (line[i] && line[i] != identifier)
-		i++;
+	if (!rgb_is_valid(line))
+		return (rgb);
 	while (line[i])
 	{
-		if (ft_isdigit(line[i]) && line[i + 3])
+		if (ft_isdigit(line[i]) && k < 3)
 		{
-			rgb[k++] = ft_atoi(&line[i]);
-			while (k < 3 && line[i] && ft_isdigit(line[i]))
-				i++;
+			rgb[k] = ft_atoi(&line[i]);
+			i += ft_int_len(rgb[k]);
+			k++;
 		}
 		if (!line[i])
 			return (rgb);
