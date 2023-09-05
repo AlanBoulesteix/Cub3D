@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/05 11:38:42 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 14:18:24 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,12 @@ int			check_line(char *line);
 /// @param map Map as a char**
 /// @return length of the longest line
 int			ft_longest_len_tab(char **map);
+
+/// @brief Check if we can start filling the map
+/// @param data Struct data, char line, char *map
+/// @return 0 or 1
+int			check_map_start(t_data *data, char *line,
+				char *map);
 
 /*#####################################################*/
 

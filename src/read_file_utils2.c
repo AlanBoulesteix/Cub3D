@@ -6,11 +6,31 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:36:04 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/05 12:10:58 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 14:17:31 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	check_map_start(t_data *data, char *line, char *map)
+{
+	int	i;
+
+	i = 0;
+	if (data->no_tex_path && data->so_tex_path && data->we_tex_path
+		&& data->ea_tex_path && data->rgb_floor && data->rgb_ceiling)
+		return (EXIT_SUCCESS);
+	if (map && map[i])
+	{
+		while (line[i])
+		{
+			if (line[i] == '\n' && line[i + 1] && line[i + 1] == '\n')
+				return (EXIT_FAILURE);
+			i++;
+		}
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	check_line(char *line)
 {

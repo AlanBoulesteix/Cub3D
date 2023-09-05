@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:51 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/05 11:34:52 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 14:13:40 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	check_map_empty_line(char *map)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
+	while (map[i] && !ft_isdigit(map[i]))
+		i++;
 	while (map[++i])
 	{
 		if (i > 0 && map[i] == '\n' && map[i + 1] && map[i + 1] == '\n')
