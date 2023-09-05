@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:28:01 by aboulest          #+#    #+#             */
-/*   Updated: 2023/09/04 18:50:29 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 09:00:27 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,11 @@ int			printf_error(int error);
 /// @param map Map stored in data
 /// @return 0 or 1
 int			check_data_map(char **map);
+
+/// @brief counts the number of tabs/lines in a char **
+/// @param map Map stored in data
+/// @return 0 or 1
+int			ft_tablen(char **tab);
 
 /*#####################################################*/
 

@@ -6,7 +6,7 @@
 /*   By: chmadran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:51 by chmadran          #+#    #+#             */
-/*   Updated: 2023/09/04 16:33:09 by chmadran         ###   ########.fr       */
+/*   Updated: 2023/09/05 08:59:02 by chmadran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ int	check_map_empty_line(char *map)
 		}
 	}
 	return (EXIT_SUCCESS);
-}
-
-static int	ft_tablen(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
 }
 
 static int	check_surrounding_walls(char **map)
@@ -86,9 +76,34 @@ static int	check_invalid_character(char **map)
 	return (EXIT_SUCCESS);
 }
 
+static int	check_count_characters(char **map)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+				count++;
+		}
+	}
+	if (count > 1 || count == 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 int	check_data_map(char **map)
 {
 	if (check_surrounding_walls(map))
+		return (EXIT_FAILURE);
+	if (check_count_characters(map))
 		return (EXIT_FAILURE);
 	if (check_invalid_character(map))
 		return (EXIT_FAILURE);
